@@ -39,7 +39,7 @@ export function tracked<T>(...[obj, key, desc]: DeepTrackedArgs<T>): unknown {
   return deepTracked(obj);
 }
 
-function deepTrackedForDescriptor(obj: object, key: string | symbol, desc: any): any {
+function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any): any {
   let value: any;
   let initializer = desc.initializer;
 
