@@ -28,13 +28,14 @@ ember install ember-deep-tracked
 import { tracked } from 'ember-deep-tracked';
 
 class Foo {
-  obj = tracked({});
-
-  // or
-  @tracked obj = {};
+  @tracked obj = { bar: 2 };
 }
 ```
-using the decorator form will track the _reference_, like `tracked` from `@glimmer/tracking` does, but then also deeply tracks the value.
+using this decorator form will track the _reference_, like `tracked` from `@glimmer/tracking` does, and then also deeply tracks the value.
+
+the entire object and any sub object can be swapped with other objects and they'll be automatically tracked.
+
+Arrays not supported (yet)
 
 ## Contributing
 

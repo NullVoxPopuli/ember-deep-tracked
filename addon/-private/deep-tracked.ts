@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 
+/**
+ * TODO: decorators and TS are... fun
+ *       this file needs a lot of work
+ *
+ */
+import { assert } from '@ember/debug';
 import { notifyPropertyChange } from '@ember/object';
 
 import { importSync } from '@embroider/macros';
@@ -65,7 +71,9 @@ function deepTracked<T extends object>(obj?: T): T | undefined {
   }
 
   if (Array.isArray(obj)) {
-    return deepArrayProxy(obj);
+    assert(`Arrays are not supported in ember-deep-tracked... yet. PR's welcome`);
+
+    // return deepArrayProxy(obj);
   }
 
   if (typeof obj === 'object') {
@@ -75,7 +83,7 @@ function deepTracked<T extends object>(obj?: T): T | undefined {
   return obj;
 }
 
-function deepArrayProxy<T extends Array<unknown>>(obj: T): TrackedProxy<T> {}
+// function deepArrayProxy<T extends Array<unknown>>(obj: T): TrackedProxy<T> {}
 
 const objProxyHandler = {
   get<T extends SomeObject>(target: T, prop: keyof T) {
