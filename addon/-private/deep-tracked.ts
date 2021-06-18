@@ -29,7 +29,7 @@ export function tracked<T>(arr: T[]): TrackedProxy<T[]>;
 // object
 export function tracked<T extends Record<string, unknown>>(obj: T): TrackedProxy<T>;
 // decorator
-export function tracked(obj: object, key: string | symbol, desc: PropertyDescriptor): void;
+export function tracked(...args: any): any;
 
 export function tracked<T>(...[obj, key, desc]: DeepTrackedArgs<T>): unknown {
   if (key !== undefined && desc !== undefined) {
