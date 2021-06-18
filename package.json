@@ -1,0 +1,138 @@
+{
+  "name": "ember-deep-tracked",
+  "version": "1.2.0",
+  "keywords": [
+    "ember-addon"
+  ],
+  "description": "The tracking hammer",
+  "repository": "https://github.com/NullVoxPopuli/ember-deep-tracked",
+  "license": "MIT",
+  "author": "NullVoxPopuli",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build --environment=production",
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel 'lint:!(fix)'",
+    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "start": "ember serve",
+    "test": "npm-run-all lint test:*",
+    "test:ember": "ember test",
+    "test:ember-compatibility": "ember try:each",
+    "prepack": "ember ts:precompile",
+    "postpack": "ember ts:clean"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^7.26.6",
+    "ember-cli-htmlbars": "^5.7.1",
+    "ember-cli-typescript": "^4.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@ember/optional-features": "^2.0.0",
+    "@ember/test-helpers": "^2.2.6",
+    "@embroider/test-setup": "^0.41.0",
+    "@glimmer/component": "^1.0.4",
+    "@glimmer/tracking": "^1.0.4",
+    "@nullvoxpopuli/eslint-configs": "^1.3.2",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@types/ember-data": "^3.16.13",
+    "@types/ember-qunit": "^3.4.13",
+    "@types/ember-resolver": "^5.0.10",
+    "@types/ember__application": "^3.16.2",
+    "@types/ember__array": "^3.16.4",
+    "@types/ember__component": "^3.16.4",
+    "@types/ember__controller": "^3.16.4",
+    "@types/ember__debug": "^3.16.3",
+    "@types/ember__engine": "^3.16.2",
+    "@types/ember__error": "^3.16.1",
+    "@types/ember__object": "^3.12.5",
+    "@types/ember__polyfills": "^3.12.1",
+    "@types/ember__routing": "^3.16.14",
+    "@types/ember__runloop": "^3.16.3",
+    "@types/ember__service": "^3.16.1",
+    "@types/ember__string": "^3.16.3",
+    "@types/ember__template": "^3.16.1",
+    "@types/ember__test": "^3.16.1",
+    "@types/ember__test-helpers": "^2.0.0",
+    "@types/ember__utils": "^3.16.2",
+    "@types/htmlbars-inline-precompile": "^1.0.1",
+    "@types/qunit": "^2.11.1",
+    "@types/rsvp": "^4.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "babel-eslint": "^10.1.0",
+    "broccoli-asset-rev": "^3.0.0",
+    "ember-auto-import": "^2.0.1",
+    "ember-cli": "~3.26.1",
+    "ember-cli-app-version": "^5.0.0",
+    "ember-cli-babel": "^7.26.6",
+    "ember-cli-dependency-checker": "^3.2.0",
+    "ember-cli-inject-live-reload": "^2.0.2",
+    "ember-cli-sri": "^2.1.1",
+    "ember-cli-terser": "^4.0.2",
+    "ember-cli-typescript-blueprints": "^3.0.0",
+    "ember-export-application-global": "^2.0.1",
+    "ember-load-initializers": "^2.1.2",
+    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-qunit": "^5.1.4",
+    "ember-resolver": "^8.0.2",
+    "ember-source": "~3.27.3",
+    "ember-template-lint": "^3.4.2",
+    "ember-try": "^1.4.0",
+    "ember-welcome-page": "^4.0.0",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-decorator-position": "^2.2.28",
+    "eslint-plugin-ember": "^10.5.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-json": "^3.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-qunit": "^6.1.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "loader.js": "^4.7.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.1",
+    "qunit": "^2.15.0",
+    "qunit-dom": "^1.6.0",
+    "semantic-release": "^17.4.3",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "volta": {
+    "node": "14.17.0",
+    "yarn": "1.22.10",
+    "npm": "7.16.0"
+  },
+  "engines": {
+    "node": "10.* || >= 12"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
+  }
+}
