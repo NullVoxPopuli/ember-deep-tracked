@@ -31,6 +31,18 @@ class Foo {
   @tracked obj = { bar: 2 };
 }
 ```
+or in a component:
+```js
+import { tracked } from 'ember-deep-tracked';
+import Component from '@glimmer/component';
+
+export default class Foo extends Component {
+  @tracked obj = { bar: 2 };
+}
+```
+```hbs
+{{this.obj.bar}} <- automatically updates when "obj.bar" changes
+```
 using this decorator form will track the _reference_, like `tracked` from `@glimmer/tracking` does, and then also deeply tracks the value.
 
 the entire object and any sub object can be swapped with other objects and they'll be automatically tracked.
