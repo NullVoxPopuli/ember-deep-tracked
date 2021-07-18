@@ -1,5 +1,8 @@
 # ember-deep-tracked
 
+[![npm version](https://badge.fury.io/js/ember-deep-tracked.svg)](https://badge.fury.io/js/ember-deep-tracked)
+[![CI](https://github.com/NullVoxPopuli/ember-deep-tracked/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/NullVoxPopuli/ember-deep-tracked/actions/workflows/ci.yml)
+
 Deep tracking using proxies for complex objects for when you want _everything_ to be reactive, at the cost of performance.
 
 This is not recommended for performance-sensitive situations such as rendering a
