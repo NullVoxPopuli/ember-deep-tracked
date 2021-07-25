@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cached } from '@glimmer/tracking';
 import { settled } from '@ember/test-helpers';
-import { module, skip, test } from 'qunit';
+import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { tracked } from 'ember-deep-tracked';
@@ -40,7 +40,7 @@ module('deep tracked', function (hooks) {
     assert.equal(instance.objDeep, 4);
   });
 
-  skip('object access in an array', async function (assert) {
+  test('object access in an array', async function (assert) {
     class Foo {
       @tracked arr: any[] = [];
 
@@ -55,9 +55,8 @@ module('deep tracked', function (hooks) {
     assert.notOk(instance.arrDeep);
 
     instance.arr.push({ foo: { bar: 2 } });
-
     await settled();
 
-    assert.equal(instance.arrDeep, 3);
+    assert.equal(instance.arrDeep, 2);
   });
 });
