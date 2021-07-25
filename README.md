@@ -50,7 +50,9 @@ using this decorator form will track the _reference_, like `tracked` from `@glim
 
 the entire object and any sub object can be swapped with other objects and they'll be automatically tracked.
 
-Arrays not supported (yet)
+`import { deepTracked } from 'ember-deep-tracked';`
+
+is also available, and is an alias of `tracked`
 
 ## Contributing
 
