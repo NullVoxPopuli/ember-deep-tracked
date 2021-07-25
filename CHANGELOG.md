@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.1.3...v1.2.0) (2021-07-25)
+
+
+### Features
+
+* **arrays:** preliminary support ([059bb48](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/059bb48b7e2335bc267ced5c2c8a5c6ba9b46114))
+
 ## [1.1.3](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.1.2...v1.1.3) (2021-07-13)
 
 
