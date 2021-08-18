@@ -1,3 +1,11 @@
+## [1.2.6](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.5...v1.2.6) (2021-08-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tracked-maps-and-sets to ^3.0.1 ([e0d1dd1](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/e0d1dd154eb543f34c7b6aabf5b63abc681b8b85))
+* **deps:** update dependency tracked-maps-and-sets to v3 ([e4783d1](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/e4783d1b8b18c5075431e68713953d9cca517878))
+
 ## [1.2.5](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.4...v1.2.5) (2021-08-10)
 
 
