@@ -63,7 +63,7 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
 
   desc.get = function get() {
     if (!value) {
-      value = deepTracked(initializer());
+      value = deepTracked(initializer.call(this));
     }
 
     consumeKey(this, key);
