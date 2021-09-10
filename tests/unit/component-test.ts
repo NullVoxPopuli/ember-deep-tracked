@@ -2,7 +2,7 @@
 import Component from '@glimmer/component';
 import { setComponentTemplate } from '@ember/component';
 import { action } from '@ember/object';
-import { click, render, settled } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
