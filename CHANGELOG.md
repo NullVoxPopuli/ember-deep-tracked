@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.8...v1.2.9) (2021-09-10)
+
+
+### Bug Fixes
+
+* call initializer with this - resolves [#128](https://github.com/NullVoxPopuli/ember-deep-tracked/issues/128) ([989ce89](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/989ce89423f30fa284da64e4e703d3e79125df8b))
+
 ## [1.2.8](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.7...v1.2.8) (2021-09-07)
 
 
