@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.9...v1.2.10) (2021-09-14)
+
+
+### Bug Fixes
+
+* **arrays:** index access is now deep tracked ([#135](https://github.com/NullVoxPopuli/ember-deep-tracked/issues/135)) ([7712e5c](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/7712e5c30844f31d87c6273d3745f5f637dc5c0b))
+
 ## [1.2.9](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.8...v1.2.9) (2021-09-10)
 
 
