@@ -59,4 +59,61 @@ module('deep tracked', function (hooks) {
 
     assert.equal(instance.arrDeep, 2);
   });
+
+  module('Arrays', function () {
+    module('#splice', function () {
+      test('it works', async function (assert) {
+        class Foo {
+          @tracked arr: any[] = [0, 1, 3];
+
+          @cached
+          get arrDeep() {
+            return this.arr[0]?.foo?.bar;
+          }
+        }
+
+        let instance = new Foo();
+
+        instance.arr.splice(1, 1);
+
+        assert.deepEqual(instance.arr, [0, 3]);
+      });
+
+      test('it works on deeply nested arrays', async function (assert) {
+        class Foo {
+          @tracked obj = { children: [{ property: [0, 1, 3] }] };
+
+          splice = () => this.obj.children[0].property.splice(1, 1);
+
+          @cached
+          get output() {
+            return this.obj.children[0].property;
+          }
+        }
+
+        let instance = new Foo();
+
+        assert.deepEqual(instance.output, [0, 1, 3]);
+        instance.splice();
+        assert.deepEqual(instance.output, [0, 3]);
+      });
+    });
+  });
+
+  test('array data can be re-set', async function (assert) {
+    class Foo {
+      @tracked arr: any[] = [0, 1, 3];
+
+      @cached
+      get arrDeep() {
+        return this.arr[0]?.foo?.bar;
+      }
+    }
+
+    let instance = new Foo();
+
+    instance.arr = [4, 8];
+
+    assert.deepEqual(instance.arr, [4, 8]);
+  });
 });

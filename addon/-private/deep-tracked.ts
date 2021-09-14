@@ -134,7 +134,7 @@ const arrayProxyHandler: ProxyHandler<object> = {
         // because indicies can change if the collection changes
         consumeKey(target, COLLECTION);
 
-        return Reflect.get(target, property, receiver);
+        return deepTracked((target as any)[property]);
       }
     }
 
