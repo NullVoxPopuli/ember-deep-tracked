@@ -50,4 +50,120 @@ module('deep tracked (in templates)', function (hooks) {
     await doThing((instance) => (instance.obj.foo = { bar: 4 }));
     assert.dom('out').hasText('4');
   });
+
+  module('Arrays', function () {
+    module('#slice', function () {
+      test('it works', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = [0, 1, 3] as any;
+
+          slice = () => (this.obj = this.obj.slice(1));
+        }
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`<button {{on 'click' this.slice}}>thing</button>
+
+            <out>{{this.obj}}</out>`,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        assert.dom('out').hasText('0,1,3');
+
+        await click('button');
+
+        assert.dom('out').hasText('1,3');
+      });
+
+      test('it works on a deeply nested arrays', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = { children: [{ property: [0, 1, 3] }] };
+
+          slice = () => {
+            this.obj.children[0].property = this.obj.children[0].property.slice(1);
+          };
+
+          get output() {
+            return this.obj.children[0].property;
+          }
+        }
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`<button {{on 'click' this.slice}}>thing</button>
+
+            <out>{{this.output}}</out>`,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        assert.dom('out').hasText('0,1,3');
+
+        await click('button');
+
+        assert.dom('out').hasText('1,3');
+      });
+    });
+
+    module('#splice', function () {
+      test('it works', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = [0, 1, 3] as any;
+
+          splice = () => this.obj.splice(1, 1);
+        }
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`<button {{on 'click' this.splice}}>thing</button>
+
+            <out>{{this.obj}}</out>`,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        assert.dom('out').hasText('0,1,3');
+
+        await click('button');
+
+        assert.dom('out').hasText('0,3');
+      });
+
+      test('it works on a deeply nested array', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = { children: [{ property: [0, 1, 3] }] };
+
+          splice = () => this.obj.children[0].property.splice(1, 1);
+
+          get output() {
+            return this.obj.children[0].property;
+          }
+        }
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`<button {{on 'click' this.splice}}>thing</button>
+
+            <out>{{this.output}}</out>`,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        assert.dom('out').hasText('0,1,3');
+
+        await click('button');
+
+        assert.dom('out').hasText('0,3');
+      });
+    });
+  });
 });
