@@ -164,6 +164,59 @@ module('deep tracked (in templates)', function (hooks) {
 
         assert.dom('out').hasText('0,3');
       });
+
+      test('it works on nested array being immutably re-set', async function (assert) {
+        class Foo extends Component {
+          @tracked arr = [
+            {
+              id: 0,
+              prop: 'foo',
+            },
+            {
+              id: 1,
+              prop: 'bar',
+
+            },
+            {
+              id: 2,
+              prop: 'baz',
+            },
+          ];
+
+          changeValue = () =>
+            (this.arr = this.arr.map((el) => {
+              if (el.id === 1) {
+                return {
+                  ...el,
+                  prop: 'boink',
+                };
+              }
+
+              return el;
+            }));
+        }
+
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`<button type="button" {{on 'click' this.changeValue}}>thing</button>
+
+            {{#each this.arr as |item index|}}
+            <div id={{concat "item" index}}>{{item.prop}}</div>
+            {{/each}}
+            `,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        assert.dom('#item1').hasText('bar');
+
+        await click('button');
+
+        assert.dom('#item1').hasText('boink');
+      });
     });
   });
 });
