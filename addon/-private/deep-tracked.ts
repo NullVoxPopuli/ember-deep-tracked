@@ -52,8 +52,9 @@ export function tracked<T>(...[obj, key, desc]: DeepTrackedArgs<T>): unknown {
   return deepTracked(obj);
 }
 
+const VALUES_CACHE = new WeakMap<any, object>();
+
 function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any): any {
-  let value: any;
   let initializer = desc.initializer;
 
   delete desc.initializer;
@@ -62,17 +63,17 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
   delete desc.configurable;
 
   desc.get = function get() {
-    if (!value) {
-      value = deepTracked(initializer.call(this));
+    if (!VALUES_CACHE.has(this)) {
+      VALUES_CACHE.set(this, deepTracked(initializer.call(this)));
     }
 
     consumeKey(this, key);
 
-    return value;
+    return VALUES_CACHE.get(this);
   };
 
   desc.set = function set(v: any) {
-    value = deepTracked(v);
+    VALUES_CACHE.set(this, deepTracked(v));
 
     dirtyKey(this, key);
   };
