@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.10...v1.2.11) (2021-09-20)
+
+
+### Bug Fixes
+
+* **#144:** run initializer and correctly manage value-cache for decorator ([2be83e0](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/2be83e0510b9267f877f769fa6b636164b6080f9)), closes [#144](https://github.com/NullVoxPopuli/ember-deep-tracked/issues/144)
+
 ## [1.2.10](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.9...v1.2.10) (2021-09-14)
 
 
