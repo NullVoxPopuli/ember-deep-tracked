@@ -116,4 +116,66 @@ module('deep tracked', function (hooks) {
 
     assert.deepEqual(instance.arr, [4, 8]);
   });
+
+  test('array data can be immutably treated', async function (assert) {
+    class Foo {
+      @tracked arr: { id: number; prop: string }[] = [
+        {
+          id: 1,
+          prop: 'foo',
+        },
+        {
+          id: 2,
+          prop: 'bar',
+        },
+        {
+          id: 3,
+          prop: 'baz',
+        },
+      ];
+    }
+
+    let instance = new Foo();
+
+    assert.deepEqual(instance.arr, [
+      {
+        id: 1,
+        prop: 'foo',
+      },
+      {
+        id: 2,
+        prop: 'bar',
+      },
+      {
+        id: 3,
+        prop: 'baz',
+      },
+    ]);
+
+    instance.arr = instance.arr.map((el) => {
+      if (el.id === 2) {
+        return {
+          ...el,
+          prop: 'boink',
+        };
+      }
+
+      return el;
+    });
+
+    assert.deepEqual(instance.arr, [
+      {
+        id: 1,
+        prop: 'foo',
+      },
+      {
+        id: 2,
+        prop: 'boink',
+      },
+      {
+        id: 3,
+        prop: 'baz',
+      },
+    ]);
+  });
 });
