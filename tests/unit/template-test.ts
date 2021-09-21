@@ -175,7 +175,6 @@ module('deep tracked (in templates)', function (hooks) {
             {
               id: 1,
               prop: 'bar',
-
             },
             {
               id: 2,
