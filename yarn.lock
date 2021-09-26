@@ -1212,12 +1212,12 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
-"@embroider/macros@^0.44.1":
-  version "0.44.1"
-  resolved "https://registry.npmjs.org/@embroider/macros/-/macros-0.44.1.tgz"
-  integrity sha512-Y3ZnSZxD+a0G6Kbfx8yBDQmGdGrKGWCknDtHophSKl+pfZROK1coMzEOifNT77O5zUKMDoZTvr2+AvcVlGj0qA==
+"@embroider/macros@^0.44.2":
+  version "0.44.2"
+  resolved "https://registry.npmjs.org/@embroider/macros/-/macros-0.44.2.tgz"
+  integrity sha512-XPHidVFp2JDaJQ7GB2X3hyG7W27WspbrjvLCvbx1MOgismhIDhzDZEdPAs02nHMaqTyrzyzBvQoyY4ZLxJuPMg==
   dependencies:
-    "@embroider/shared-internals" "0.44.1"
+    "@embroider/shared-internals" "0.44.2"
     assert-never "^1.2.1"
     ember-cli-babel "^7.26.6"
     find-up "^5.0.0"
@@ -1225,10 +1225,10 @@
     resolve "^1.20.0"
     semver "^7.3.2"
 
-"@embroider/shared-internals@0.44.1":
-  version "0.44.1"
-  resolved "https://registry.npmjs.org/@embroider/shared-internals/-/shared-internals-0.44.1.tgz"
-  integrity sha512-1RLaB0+CqWz4BBbvDu/jp7mBIqxrHKnIIjDU5XwnfIfKGSfI1zpzpIbpsGSi35zx7ybplSq1FSEenaUa37QCOg==
+"@embroider/shared-internals@0.44.2":
+  version "0.44.2"
+  resolved "https://registry.npmjs.org/@embroider/shared-internals/-/shared-internals-0.44.2.tgz"
+  integrity sha512-9WMFHbNvf2PJEUURjRkewUlsJAf1DJRNKPpyqhiCYdW7tf6XfZCuhetyCROlWGK+gH4s960yb+igDQXuiNedyQ==
   dependencies:
     ember-rfc176-data "^0.3.17"
     fs-extra "^9.1.0"
@@ -1250,10 +1250,10 @@
     semver "^7.3.2"
     typescript-memoize "^1.0.0-alpha.3"
 
-"@embroider/test-setup@^0.44.1":
-  version "0.44.1"
-  resolved "https://registry.npmjs.org/@embroider/test-setup/-/test-setup-0.44.1.tgz"
-  integrity sha512-l2Xhlgucnagx1e17So6a+BA8B1842NdrVMb/Dvq0z7z4mIu3JrdDo982DBNL0gxWbK/dM8x7aTm057FTER6v5Q==
+"@embroider/test-setup@^0.44.2":
+  version "0.44.2"
+  resolved "https://registry.npmjs.org/@embroider/test-setup/-/test-setup-0.44.2.tgz"
+  integrity sha512-w9Qo3PnM1v3pH6UB875DkbbmCoOp7CllUD/I/TGve27uAVtXqzFMO9dC6ibY5WMJusVhbFtyZzIhgN2/rkcCLw==
   dependencies:
     lodash "^4.17.21"
     resolve "^1.20.0"
@@ -11796,9 +11796,9 @@ resolve-package-path@^3.1.0:
     resolve "^1.17.0"
 
 resolve-package-path@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/resolve-package-path/-/resolve-package-path-4.0.1.tgz"
-  integrity sha512-2gb/yU2fSfX22pjDYyevzyOKK9q72XKUFqlAsrfPzZArM4JkIH/Qcme4n3EbaZttObWm/fIFLbPxrXIyiL8wdQ==
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/resolve-package-path/-/resolve-package-path-4.0.3.tgz"
+  integrity sha512-SRpNAPW4kewOaNUt8VPqhJ0UMxawMwzJD8V7m1cJfdSTK9ieZwS6K7Dabsm4bmLFM96Z5Y/UznrpG5kt1im8yA==
   dependencies:
     path-root "^0.1.1"
 
