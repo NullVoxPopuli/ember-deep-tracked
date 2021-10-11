@@ -72,7 +72,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-auto-import": "^2.2.1",
+    "ember-auto-import": "^2.2.2",
     "ember-cached-decorator-polyfill": "^0.1.4",
     "ember-cli": "~3.28.1",
     "ember-cli-app-version": "^5.0.0",
