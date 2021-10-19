@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.15...v1.2.16) (2021-10-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ember-cli-htmlbars to v6 ([5c00a06](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/5c00a06aecc00e8be11587d2e1a4557c75b2bfa0))
+
 ## [1.2.15](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.14...v1.2.15) (2021-10-14)
 
 
