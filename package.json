@@ -33,7 +33,7 @@
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^6.0.0",
     "ember-cli-typescript": "^4.2.1",
-    "tracked-maps-and-sets": "^3.0.1"
+    "ember-tracked-storage-polyfill": "^1.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
