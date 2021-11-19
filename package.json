@@ -28,7 +28,7 @@
     "postpack": "ember ts:clean"
   },
   "dependencies": {
-    "@embroider/macros": "^0.47.0",
+    "@embroider/macros": "^0.47.2",
     "@glimmer/tracking": "^1.0.4",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-htmlbars": "^6.0.0",
@@ -40,7 +40,7 @@
     "@commitlint/config-conventional": "^13.2.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.5.0",
-    "@embroider/test-setup": "^0.47.0",
+    "@embroider/test-setup": "^0.47.2",
     "@glimmer/component": "^1.0.4",
     "@nullvoxpopuli/eslint-configs": "^1.4.11",
     "@semantic-release/changelog": "^6.0.1",
