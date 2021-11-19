@@ -1223,12 +1223,12 @@
     resolve "^1.8.1"
     semver "^7.3.2"
 
-"@embroider/macros@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.npmjs.org/@embroider/macros/-/macros-0.47.0.tgz"
-  integrity sha512-xOLfITKKwAtK/W6aIchCjKlZy2gGoCnARypPZfT6iDr3Xl3JOCgnxZSZ9uhyDzIA9ZmA9aijB4uLU9yaT1tdeg==
+"@embroider/macros@^0.47.2":
+  version "0.47.2"
+  resolved "https://registry.npmjs.org/@embroider/macros/-/macros-0.47.2.tgz"
+  integrity sha512-ViNWluJCeM5OPlM3rs8kdOz3RV5rpfXX5D2rDnc/q86xRS0xf4NFEjYRV7W6fBcD0b3v5jSHDTwrjq9Kee4rHg==
   dependencies:
-    "@embroider/shared-internals" "0.47.0"
+    "@embroider/shared-internals" "0.47.2"
     assert-never "^1.2.1"
     ember-cli-babel "^7.26.6"
     find-up "^5.0.0"
@@ -1236,10 +1236,10 @@
     resolve "^1.20.0"
     semver "^7.3.2"
 
-"@embroider/shared-internals@0.47.0":
-  version "0.47.0"
-  resolved "https://registry.npmjs.org/@embroider/shared-internals/-/shared-internals-0.47.0.tgz"
-  integrity sha512-ANB/6VAVZuIXhvCogtbZ17zskdG2M62nK+M5T5XdUCaHOnX4fMAhbJc2it41+R9PN4AXgAoYG+qiid+1HG1CUQ==
+"@embroider/shared-internals@0.47.2":
+  version "0.47.2"
+  resolved "https://registry.npmjs.org/@embroider/shared-internals/-/shared-internals-0.47.2.tgz"
+  integrity sha512-SxdZYjAE0fiM5zGDz+12euWIsQZ1tsfR1k+NKmiWMyLhA5T3pNgbR2/Djvx/cVIxOtEavGGSllYbzRKBtV4xMg==
   dependencies:
     babel-import-util "^0.2.0"
     ember-rfc176-data "^0.3.17"
@@ -1275,10 +1275,10 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/test-setup@^0.47.0":
-  version "0.47.0"
-  resolved "https://registry.npmjs.org/@embroider/test-setup/-/test-setup-0.47.0.tgz"
-  integrity sha512-KadqpSno0qyhVW2VtXTU7i9OQHNT1tpcrQ+06sTaFmX275yGxHUTcSr//CV1ErtzejcVPvkGnRQIUKPRXZsNVA==
+"@embroider/test-setup@^0.47.2":
+  version "0.47.2"
+  resolved "https://registry.npmjs.org/@embroider/test-setup/-/test-setup-0.47.2.tgz"
+  integrity sha512-zTiNaicOeBJWQ+uAJOEg4Z4plmvF2Ckze+tMZ0sycp2o09UV72WC8s9L3pssWOGgHMV6Kl+eCfFQelWwUOqz1Q==
   dependencies:
     lodash "^4.17.21"
     resolve "^1.20.0"
