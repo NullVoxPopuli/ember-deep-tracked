@@ -1580,9 +1580,9 @@
   integrity sha512-3BGrt6FLjqM6br5AhWRKTr3u5GIVkjRYeAFrMp3HjnfICrg4xOrVRwFavKT6tsp++bq5dluL5t8ME/Nha/6c1Q==
 
 "@npmcli/config@*":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@npmcli/config/-/config-2.3.1.tgz#41d80ce272831461b5cb158afa110525d4be0fed"
-  integrity sha512-F/8R/Zqun8682TgaCILUNoaVfd1LVaYZ/jcVt9KWzfKpzcPus1zEApAl54PqVqVJbNq6f01QTDQHD6L/n56BXw==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@npmcli/config/-/config-2.3.2.tgz#6027efc132fcc809abef749c2f2e13dc4dcd6e0b"
+  integrity sha512-2/9dj143BFgQR8qxJbYptd8k+4+Po2uHYq3H6498ynZcRu4LrsDlngov5HGrvo2+f0pe0fBJwDEP2rRtaW8bkw==
   dependencies:
     ini "^2.0.0"
     mkdirp-infer-owner "^2.0.0"
@@ -14117,10 +14117,10 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-watchpack@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/watchpack/-/watchpack-2.2.0.tgz"
-  integrity sha512-up4YAn/XHgZHIxFBVCdlMiWDj6WaLKpwVeGQk2I5thdYxF/KmF0aaz6TfJZ/hfl1h/XlcDr7k1KH7ThDagpFaA==
+watchpack@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/watchpack/-/watchpack-2.3.0.tgz"
+  integrity sha512-MnN0Q1OsvB/GGHETrFeZPQaOelWh/7O+EiFlj8sM9GPjtQkis7k01aAxrg/18kTfoIVcLL+haEVFlXDaSRwKRw==
   dependencies:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
@@ -14184,10 +14184,10 @@ webpack@^4.43.0:
     watchpack "^1.7.4"
     webpack-sources "^1.4.1"
 
-webpack@^5.64.3:
-  version "5.64.3"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-5.64.3.tgz"
-  integrity sha512-XF6/IL9Bw2PPQioiR1UYA8Bs4tX3QXJtSelezKECdLFeSFzWoe44zqTzPW5N+xI3fACaRl2/G3sNA4WYHD7Iww==
+webpack@^5.64.4:
+  version "5.64.4"
+  resolved "https://registry.npmjs.org/webpack/-/webpack-5.64.4.tgz"
+  integrity sha512-LWhqfKjCLoYJLKJY8wk2C3h77i8VyHowG3qYNZiIqD6D0ZS40439S/KVuc/PY48jp2yQmy0mhMknq8cys4jFMw==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.50"
@@ -14211,7 +14211,7 @@ webpack@^5.64.3:
     schema-utils "^3.1.0"
     tapable "^2.1.1"
     terser-webpack-plugin "^5.1.3"
-    watchpack "^2.2.0"
+    watchpack "^2.3.0"
     webpack-sources "^3.2.2"
 
 websocket-driver@>=0.5.1:
