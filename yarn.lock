@@ -1131,7 +1131,7 @@
     mkdirp "^1.0.4"
     silent-error "^1.1.1"
 
-"@ember/test-helpers@^2.3.0", "@ember/test-helpers@^2.6.0":
+"@ember/test-helpers@^2.6.0":
   version "2.6.0"
   resolved "https://registry.npmjs.org/@ember/test-helpers/-/test-helpers-2.6.0.tgz"
   integrity sha512-N5sr3layWk60wB3maCy+/5hFHQRcTh8aqxcZTSs3Od9QkuHdWBtRgMGLP/35mXpJlgWuu3xqLpt6u3dGHc8gCg==
@@ -5722,7 +5722,7 @@ ember-cli-babel-plugin-helpers@^1.0.0, ember-cli-babel-plugin-helpers@^1.1.1:
   resolved "https://registry.npmjs.org/ember-cli-babel-plugin-helpers/-/ember-cli-babel-plugin-helpers-1.1.1.tgz"
   integrity sha512-sKvOiPNHr5F/60NLd7SFzMpYPte/nnGkq/tMIfXejfKHIhaiIkYFqX8Z9UFTKWLLn+V7NOaby6niNPZUdvKCRw==
 
-ember-cli-babel@^7.0.0, ember-cli-babel@^7.13.0, ember-cli-babel@^7.13.2, ember-cli-babel@^7.21.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.0, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.7.3:
+ember-cli-babel@^7.0.0, ember-cli-babel@^7.13.0, ember-cli-babel@^7.13.2, ember-cli-babel@^7.21.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.0, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.6, ember-cli-babel@^7.7.3:
   version "7.26.6"
   resolved "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-7.26.6.tgz"
   integrity sha512-040svtfj2RC35j/WMwdWJFusZaXmNoytLAMyBDGLMSlRvznudTxZjGlPV6UupmtTBApy58cEF8Fq4a+COWoEmQ==
@@ -11664,7 +11664,7 @@ qunit-dom@^2.0.0:
     ember-cli-babel "^7.23.0"
     ember-cli-version-checker "^5.1.1"
 
-qunit@^2.16.0, qunit@^2.17.2:
+qunit@^2.17.2:
   version "2.17.2"
   resolved "https://registry.npmjs.org/qunit/-/qunit-2.17.2.tgz"
   integrity sha512-17isVvuOmALzsPjiV7wFg/6O5vJYXBrQZPwocfQSSh0I/rXvfX7bKMFJ4GMVW3U4P8r2mBeUy8EAngti4QD2Vw==
@@ -13542,16 +13542,15 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
-tracked-maps-and-sets@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/tracked-maps-and-sets/-/tracked-maps-and-sets-3.0.1.tgz"
-  integrity sha512-x1IC6C6muJzpeZaQOcollKiLYSazWEtSM5EDCO5PUfbU7RTMa1x7t9SJrwqDxeasvmJCa1QftECsRtI7osOs8w==
+tracked-maps-and-sets@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/tracked-maps-and-sets/-/tracked-maps-and-sets-3.0.2.tgz"
+  integrity sha512-UIRcWsX1kDOcC/Q2R58weYWlw01EnmWWBwUv3okWS+zMBvsgIfYoO6veHhuNE3hgzWCEImNp46QS5CyKnw5QUA==
   dependencies:
-    "@ember/test-helpers" "^2.3.0"
     "@glimmer/tracking" "^1.0.0"
-    ember-cli-babel "^7.26.5"
+    ember-cli-babel "^7.26.6"
+    ember-cli-typescript "^4.2.1"
     ember-tracked-storage-polyfill "1.0.0"
-    qunit "^2.16.0"
 
 traverse@~0.6.6:
   version "0.6.6"
