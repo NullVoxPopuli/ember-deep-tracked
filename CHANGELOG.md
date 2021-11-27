@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.17...v1.3.0) (2021-11-27)
+
+
+### Features
+
+* use tracked-storage primitives ([143a4ab](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/143a4abd261a1e584f04c594c4db9c351c46166e))
+
 ## [1.2.17](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.2.16...v1.2.17) (2021-11-19)
 
 
