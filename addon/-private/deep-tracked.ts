@@ -6,14 +6,15 @@
  *       this file needs a lot of work
  *
  */
-import { notifyPropertyChange } from '@ember/object';
-
-import { importSync } from '@embroider/macros';
-
-const trackedPrivates = importSync('tracked-maps-and-sets/-private/util');
-const { consumeKey, dirtyKey } = trackedPrivates as Record<string, any>;
-
-const COLLECTION = Symbol();
+import {
+  dirtyCollection,
+  hasStorage,
+  initStorage,
+  readCollection,
+  readStorage,
+  STORAGES,
+  updateStorage,
+} from './utils';
 
 type DeepTrackedArgs<T> =
   | [T[]]
@@ -52,8 +53,6 @@ export function tracked<T>(...[obj, key, desc]: DeepTrackedArgs<T>): unknown {
   return deepTracked(obj);
 }
 
-const VALUES_CACHE = new WeakMap<any, object>();
-
 function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any): any {
   let initializer = desc.initializer;
 
@@ -63,19 +62,15 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
   delete desc.configurable;
 
   desc.get = function get() {
-    if (!VALUES_CACHE.has(this)) {
-      VALUES_CACHE.set(this, deepTracked(initializer.call(this)));
+    if (hasStorage(this, key)) {
+      return readStorage(this, key);
     }
 
-    consumeKey(this, key);
-
-    return VALUES_CACHE.get(this);
+    return initStorage(this, key, deepTracked(initializer.call(this)));
   };
 
   desc.set = function set(v: any) {
-    VALUES_CACHE.set(this, deepTracked(v));
-
-    dirtyKey(this, key);
+    updateStorage(this, key, deepTracked(v));
   };
 }
 
@@ -126,16 +121,20 @@ const BOUND_FUN = new WeakMap();
 
 const arrayProxyHandler: ProxyHandler<object> = {
   get(target, property, receiver) {
+    if (property === STORAGES) {
+      return Reflect.get(target, property, receiver);
+    }
+
     if (typeof property === 'string') {
       let parsed = parseInt(property, 10);
 
       if (!isNaN(parsed)) {
-        consumeKey(target, parsed);
         // Why consume the collection?
-        // because indicies can change if the collection changes
-        consumeKey(target, COLLECTION);
+        // because indices can change if the collection changes
+        readCollection(target);
+        readStorage(target, parsed);
 
-        return deepTracked((target as any)[property]);
+        return deepTracked(Reflect.get(target, parsed, receiver));
       }
     }
 
@@ -147,10 +146,12 @@ const arrayProxyHandler: ProxyHandler<object> = {
       if (!existing) {
         let fn = (...args: unknown[]) => {
           if (ARRAY_CONSUME_METHODS.includes(property)) {
-            consumeKey(target, COLLECTION);
-          } else {
-            dirtyKey(target, COLLECTION);
+            readCollection(target);
+
+            return (target as any)[property](...args);
           }
+
+          dirtyCollection(target);
 
           return (target as any)[property](...args);
         };
@@ -168,13 +169,17 @@ const arrayProxyHandler: ProxyHandler<object> = {
       let parsed = parseInt(property, 10);
 
       if (!isNaN(parsed)) {
-        dirtyKey(target, property);
+        updateStorage(target, property, value);
+
+        return Reflect.set(target, property, value, receiver);
+      } else if (property === 'length') {
+        dirtyCollection(target);
 
         return Reflect.set(target, property, value, receiver);
       }
     }
 
-    dirtyKey(target, COLLECTION);
+    dirtyCollection(target);
 
     return Reflect.set(target, property, value, receiver);
   },
@@ -184,34 +189,34 @@ const arrayProxyHandler: ProxyHandler<object> = {
 };
 
 const objProxyHandler = {
-  get<T extends object>(target: T, prop: keyof T) {
-    consumeKey(target, prop);
+  get<T extends object>(target: T, prop: keyof T, receiver: T) {
+    if (prop === STORAGES) {
+      return Reflect.get(target, prop, receiver);
+    }
 
-    return deepTracked((target as any)[prop]);
+    readStorage(target, prop);
+
+    return deepTracked(Reflect.get(target, prop, receiver));
   },
   has<T extends object>(target: T, prop: keyof T) {
-    consumeKey(target, prop);
+    readStorage(target, prop);
 
     return prop in target;
   },
 
   ownKeys<T extends object>(target: T) {
-    consumeKey(target, COLLECTION);
+    readCollection(target);
 
     return Reflect.ownKeys(target);
   },
 
-  set<T extends object>(target: T, prop: keyof T, value: T[keyof T], receiver: object) {
-    target[prop] = value;
+  set<T extends object>(target: T, prop: keyof T, value: T[keyof T], receiver: T) {
+    updateStorage(target, prop);
+    dirtyCollection(target);
 
-    dirtyKey(target, prop);
-    dirtyKey(target, COLLECTION);
-
-    // We need to notify this way to make {{each-in}} update
-    notifyPropertyChange(receiver, '_SOME_PROP_');
-
-    return true;
+    return Reflect.set(target, prop, value, receiver);
   },
+
   getPrototypeOf() {
     return Object.prototype;
   },
