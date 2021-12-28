@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.4...v1.3.5) (2021-12-28)
+
+
+### Bug Fixes
+
+* **arrays:** support {{each}} when changing array indicies' values ([21658d0](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/21658d0fe8ddaf742f33489c3e87f935db5e17f4))
+
 ## [1.3.4](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.3...v1.3.4) (2021-12-21)
 
 
