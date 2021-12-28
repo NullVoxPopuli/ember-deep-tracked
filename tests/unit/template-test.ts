@@ -52,6 +52,65 @@ module('deep tracked (in templates)', function (hooks) {
   });
 
   module('Arrays', function () {
+    module('{{each}}', function () {
+      test('it works with shallow arrays', async function (assert) {
+        let myArray = tracked([1, 2, 3]);
+
+        this.setProperties({ myArray });
+
+        await render(hbs`
+          <ul>
+            {{#each this.myArray as |item|}}
+              <li>{{item}}</li>
+            {{/each}}
+          </ul>
+        `);
+
+        assert.dom('li').exists({ count: 3 });
+
+        myArray.push(4);
+
+        await settled();
+
+        assert.dom('li').exists({ count: 4 });
+
+        assert.dom().hasText('1 2 3 4');
+        myArray[2] = 5;
+        await settled();
+
+        assert.dom().hasText('1 2 5 4');
+      });
+
+      test('it works with deep arrays', async function (assert) {
+        let myArray = tracked([[1, 2, 3]]);
+
+        this.setProperties({ myArray });
+
+        await render(hbs`
+          <ul>
+            {{#each this.myArray as |collection|}}
+              {{#each collection as |item|}}
+                <li>{{item}}</li>
+              {{/each}}
+            {{/each}}
+          </ul>
+        `);
+
+        assert.dom('li').exists({ count: 3 });
+
+        myArray[0].push(4);
+
+        await settled();
+
+        assert.dom('li').exists({ count: 4 });
+
+        assert.dom().hasText('1 2 3 4');
+        myArray[0][2] = 5;
+        await settled();
+        assert.dom().hasText('1 2 5 4');
+      });
+    });
+
     module('#slice', function () {
       test('it works', async function (assert) {
         class Foo extends Component {

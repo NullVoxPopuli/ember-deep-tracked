@@ -170,6 +170,10 @@ const arrayProxyHandler: ProxyHandler<object> = {
 
       if (!isNaN(parsed)) {
         updateStorage(target, property, value);
+        // when setting, the collection must be dirtied.. :(
+        // this is to support updating {{#each}},
+        // which uses object identity by default
+        dirtyCollection(target);
 
         return Reflect.set(target, property, value, receiver);
       } else if (property === 'length') {
