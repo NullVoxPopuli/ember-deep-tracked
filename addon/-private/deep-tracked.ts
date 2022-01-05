@@ -74,7 +74,7 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
   };
 }
 
-// const ARRAY_DIRTY_METHODS = [];
+const ARRAY_COLLECTION_PROPERTIES = ['length'];
 const ARRAY_CONSUME_METHODS = [
   Symbol.iterator,
   'concat',
@@ -121,8 +121,10 @@ const BOUND_FUN = new WeakMap();
 
 const arrayProxyHandler: ProxyHandler<object> = {
   get(target, property, receiver) {
+    let value = Reflect.get(target, property, receiver);
+
     if (property === STORAGES) {
-      return Reflect.get(target, property, receiver);
+      return value;
     }
 
     if (typeof property === 'string') {
@@ -134,11 +136,15 @@ const arrayProxyHandler: ProxyHandler<object> = {
         readCollection(target);
         readStorage(target, parsed);
 
-        return deepTracked(Reflect.get(target, parsed, receiver));
+        return deepTracked(value);
+      }
+
+      if (ARRAY_COLLECTION_PROPERTIES.includes(property)) {
+        readCollection(target);
+
+        return value;
       }
     }
-
-    let value = Reflect.get(target, property, receiver);
 
     if (typeof value === 'function') {
       let existing = BOUND_FUN.get(value);
