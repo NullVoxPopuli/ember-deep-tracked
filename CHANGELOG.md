@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.5...v1.3.6) (2022-01-05)
+
+
+### Bug Fixes
+
+* **arrays:** consume the collection when length is accessed ([1047b0c](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/1047b0ca8389341a31b51aec593bc016827ed081))
+
 ## [1.3.5](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.4...v1.3.5) (2021-12-28)
 
 
