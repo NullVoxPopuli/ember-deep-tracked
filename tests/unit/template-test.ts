@@ -11,44 +11,86 @@ import { tracked } from 'ember-deep-tracked';
 module('deep tracked (in templates)', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('object access', async function (assert) {
-    class Foo extends Component {
-      @tracked obj = {} as any;
-    }
-    this.owner.register(
-      'component:foo',
-      setComponentTemplate(
-        hbs`<button {{on 'click' (fn @setNext this)}}>thing</button>
+  module('Objects', function () {
+    test('object access', async function (assert) {
+      class Foo extends Component {
+        @tracked obj = {} as any;
+      }
+      this.owner.register(
+        'component:foo',
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
 
-            <out>{{this.obj.foo.bar}}</out>`,
-        Foo
-      )
-    );
+              <out>{{this.obj.foo.bar}}</out>`,
+          Foo
+        )
+      );
 
-    this.setProperties({ setNext: () => {} });
+      this.setProperties({ setNext: () => {} });
 
-    const doThing = async (callback: (data: Foo) => void) => {
-      this.setProperties({ setNext: callback });
+      const doThing = async (callback: (data: Foo) => void) => {
+        this.setProperties({ setNext: callback });
 
-      await settled(); // wait for reactivity before clicking -- does click do this for us?
-      await click('button');
-    };
+        await settled(); // wait for reactivity before clicking -- does click do this for us?
+        await click('button');
+      };
 
-    await render(hbs`<Foo @setNext={{this.setNext}}/>`);
+      await render(hbs`<Foo @setNext={{this.setNext}}/>`);
 
-    assert.dom('out').hasNoText();
+      assert.dom('out').hasNoText();
 
-    await doThing((instance) => (instance.obj.foo = { bar: 3 }));
-    assert.dom('out').hasText('3');
+      await doThing((instance) => (instance.obj.foo = { bar: 3 }));
+      assert.dom('out').hasText('3');
 
-    await doThing((instance) => (instance.obj.foo = { bar: 4 }));
-    assert.dom('out').hasText('4');
+      await doThing((instance) => (instance.obj.foo = { bar: 4 }));
+      assert.dom('out').hasText('4');
 
-    await doThing((instance) => (instance.obj = { foo: { bar: 5 } }));
-    assert.dom('out').hasText('5');
+      await doThing((instance) => (instance.obj = { foo: { bar: 5 } }));
+      assert.dom('out').hasText('5');
 
-    await doThing((instance) => (instance.obj.foo = { bar: 4 }));
-    assert.dom('out').hasText('4');
+      await doThing((instance) => (instance.obj.foo = { bar: 4 }));
+      assert.dom('out').hasText('4');
+    });
+
+    test('it works with nested arrays', async function (assert) {
+      class Foo extends Component {
+        @tracked obj = {
+          array: [],
+        } as any;
+      }
+      this.owner.register(
+        'component:foo',
+        setComponentTemplate(
+          hbs`
+            <button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
+
+            <ul>
+              {{#each this.obj.array as |item|}}
+                <li>{{item}}</li>
+              {{/each}}
+            </ul>`,
+          Foo
+        )
+      );
+
+      this.setProperties({ setNext: () => {} });
+
+      const doThing = async (callback: (data: Foo) => void) => {
+        this.setProperties({ setNext: callback });
+
+        await settled(); // wait for reactivity before clicking -- does click do this for us?
+        await click('button');
+      };
+
+      await render(hbs`<Foo @setNext={{this.setNext}}/>`);
+
+      assert.dom('li').doesNotExist();
+      await doThing((instance) => {
+        instance.obj.array.push('1');
+      });
+
+      assert.dom('li').exists({ count: 1 });
+    });
   });
 
   module('Arrays', function () {
@@ -121,7 +163,7 @@ module('deep tracked (in templates)', function (hooks) {
         this.owner.register(
           'component:foo',
           setComponentTemplate(
-            hbs`<button {{on 'click' this.slice}}>thing</button>
+            hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
             Foo
@@ -152,7 +194,7 @@ module('deep tracked (in templates)', function (hooks) {
         this.owner.register(
           'component:foo',
           setComponentTemplate(
-            hbs`<button {{on 'click' this.slice}}>thing</button>
+            hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.output}}</out>`,
             Foo
@@ -179,7 +221,7 @@ module('deep tracked (in templates)', function (hooks) {
         this.owner.register(
           'component:foo',
           setComponentTemplate(
-            hbs`<button {{on 'click' this.splice}}>thing</button>
+            hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
             Foo
@@ -208,7 +250,7 @@ module('deep tracked (in templates)', function (hooks) {
         this.owner.register(
           'component:foo',
           setComponentTemplate(
-            hbs`<button {{on 'click' this.splice}}>thing</button>
+            hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.output}}</out>`,
             Foo
