@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.6...v1.3.7) (2022-01-08)
+
+
+### Bug Fixes
+
+* **deps:** update embroider monorepo to ^0.50.0 ([1264100](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/1264100e788cda9a175442cf52b981050bdc7b7d))
+
 ## [1.3.6](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.5...v1.3.6) (2022-01-05)
 
 
