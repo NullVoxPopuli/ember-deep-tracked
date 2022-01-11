@@ -9,55 +9,72 @@ import { tracked } from 'ember-deep-tracked';
 module('deep tracked', function (hooks) {
   setupTest(hooks);
 
-  test('object access', async function (assert) {
-    class Foo {
-      @tracked obj = {} as any;
+  module('Objects', function () {
+    test('object access', async function (assert) {
+      class Foo {
+        @tracked obj = {} as any;
 
-      @cached
-      get objDeep() {
-        return this.obj.foo?.bar;
+        @cached
+        get objDeep() {
+          return this.obj.foo?.bar;
+        }
       }
-    }
 
-    let instance = new Foo();
+      let instance = new Foo();
 
-    assert.notOk(instance.objDeep);
+      assert.notOk(instance.objDeep);
 
-    instance.obj.foo = { bar: 3 };
-    await settled();
-    assert.equal(instance.objDeep, 3);
+      instance.obj.foo = { bar: 3 };
+      await settled();
+      assert.equal(instance.objDeep, 3);
 
-    instance.obj.foo = { bar: 4 };
-    await settled();
-    assert.equal(instance.objDeep, 4);
+      instance.obj.foo = { bar: 4 };
+      await settled();
+      assert.equal(instance.objDeep, 4);
 
-    instance.obj = { foo: { bar: 5 } };
-    await settled();
-    assert.equal(instance.objDeep, 5);
+      instance.obj = { foo: { bar: 5 } };
+      await settled();
+      assert.equal(instance.objDeep, 5);
 
-    instance.obj.foo = { bar: 4 };
-    await settled();
-    assert.equal(instance.objDeep, 4);
-  });
+      instance.obj.foo = { bar: 4 };
+      await settled();
+      assert.equal(instance.objDeep, 4);
+    });
 
-  test('object access in an array', async function (assert) {
-    class Foo {
-      @tracked arr: any[] = [];
+    test('object access in an array', async function (assert) {
+      class Foo {
+        @tracked arr: any[] = [];
 
-      @cached
-      get arrDeep() {
-        return this.arr[0]?.foo?.bar;
+        @cached
+        get arrDeep() {
+          return this.arr[0]?.foo?.bar;
+        }
       }
-    }
 
-    let instance = new Foo();
+      let instance = new Foo();
 
-    assert.notOk(instance.arrDeep);
+      assert.notOk(instance.arrDeep);
 
-    instance.arr.push({ foo: { bar: 2 } });
-    await settled();
+      instance.arr.push({ foo: { bar: 2 } });
+      await settled();
 
-    assert.equal(instance.arrDeep, 2);
+      assert.equal(instance.arrDeep, 2);
+    });
+
+    test('undefined to object', async function (assert) {
+      class Foo {
+        @tracked obj?: Record<string, any>;
+      }
+
+      let instance = new Foo();
+
+      assert.notOk(instance.obj);
+
+      instance.obj = {};
+      await settled();
+
+      assert.deepEqual(instance.obj, {});
+    });
   });
 
   module('Arrays', function () {
