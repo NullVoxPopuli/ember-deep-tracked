@@ -66,7 +66,7 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
       return readStorage(this, key);
     }
 
-    return initStorage(this, key, deepTracked(initializer.call(this)));
+    return initStorage(this, key, deepTracked(initializer?.call(this)));
   };
 
   desc.set = function set(v: any) {
