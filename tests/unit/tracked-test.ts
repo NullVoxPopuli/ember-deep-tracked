@@ -68,7 +68,22 @@ module('deep tracked', function (hooks) {
 
       let instance = new Foo();
 
-      assert.notOk(instance.obj);
+      assert.strictEqual(instance.obj, null);
+
+      instance.obj = {};
+      await settled();
+
+      assert.deepEqual(instance.obj, {});
+    });
+
+    test('null to object', async function (assert) {
+      class Foo {
+        @tracked obj: Record<string, any> | null = null;
+      }
+
+      let instance = new Foo();
+
+      assert.strictEqual(instance.obj, null);
 
       instance.obj = {};
       await settled();
