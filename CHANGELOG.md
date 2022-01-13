@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.8...v1.3.9) (2022-01-13)
+
+
+### Bug Fixes
+
+* **decorator:** not setting a value no longer errors ([24c44a6](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/24c44a63c7fd19ecdf5017a896fb58cba11fe8e7))
+
 ## [1.3.8](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.7...v1.3.8) (2022-01-13)
 
 
