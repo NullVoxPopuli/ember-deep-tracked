@@ -144,8 +144,12 @@ module('deep tracked', function (hooks) {
 
       instance.arr.push(item);
 
-      assert.strictEqual(instance.arr.indexOf(item), 0);
-      assert.strictEqual(instance.arr.indexOf(item), 0);
+      let arr = instance.arr;
+      let first = arr.indexOf(item);
+      let second = arr.indexOf(item);
+
+      assert.strictEqual(first, 0);
+      assert.strictEqual(second, 0);
     });
   });
 
