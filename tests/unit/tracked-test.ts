@@ -130,6 +130,23 @@ module('deep tracked', function (hooks) {
         assert.deepEqual(instance.output, [0, 3]);
       });
     });
+
+    test('#indexOf', async function (assert) {
+      assert.expect(2);
+
+      class Foo {
+        @tracked arr = [] as any;
+      }
+
+      let instance = new Foo();
+
+      const item = { bar: 'baz' };
+
+      instance.arr.push(item);
+
+      assert.strictEqual(instance.arr.indexOf(item), 0);
+      assert.strictEqual(instance.arr.indexOf(item), 0);
+    });
   });
 
   test('array data can be re-set', async function (assert) {
