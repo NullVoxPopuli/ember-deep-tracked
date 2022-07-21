@@ -82,7 +82,7 @@ jobs:
         with:
           node-version: 12.x
       - name: install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
 
