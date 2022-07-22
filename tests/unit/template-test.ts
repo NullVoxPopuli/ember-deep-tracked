@@ -317,6 +317,59 @@ module('deep tracked (in templates)', function (hooks) {
 
         assert.dom('#item1').hasText('boink');
       });
+
+      test('it works via a getter', async function (assert) {
+        class Foo extends Component {
+          @tracked arr = [];
+
+          get filtered() {
+            return this.arr.filter(item => !item.hide)
+          }
+
+          add = (item) => this.arr.push({ ...item });
+          remove = (item) => item.hide = true;
+        }
+
+        this.owner.register(
+          'component:foo',
+          setComponentTemplate(
+            hbs`
+            <button
+              type="button"
+              class="add"
+              {{on "click" (fn this.add (hash name="Item"))}}
+            >
+              Add
+            </button>
+
+            {{#each this.filtered as |item|}}
+              <div class="item">
+                {{item.name}}
+                <button
+                  type="button"
+                  class="remove"
+                  {{on "click" (fn this.remove item)}}
+                >
+                  Remove
+                </button>
+              </div>
+            {{/each}}
+            `,
+            Foo
+          )
+        );
+
+        await render(hbs`<Foo />`);
+
+        await click('.add');
+        await click('.add');
+
+        assert.dom('.item').exists({ count: 2 });
+
+        await click('.remove');
+
+        assert.dom('.item').exists({ count: 1 });
+      });
     });
   });
 });
