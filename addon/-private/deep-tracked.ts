@@ -7,6 +7,7 @@
  *
  */
 import {
+  BOUND_FUN,
   dirtyCollection,
   hasStorage,
   initStorage,
@@ -77,16 +78,20 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
 const ARRAY_COLLECTION_PROPERTIES = ['length'];
 const ARRAY_CONSUME_METHODS = [
   Symbol.iterator,
+  'at',
   'concat',
   'entries',
   'every',
-  'fill',
   'filter',
   'find',
   'findIndex',
+  'findLast',
+  'findLastIndex',
   'flat',
   'flatMap',
   'forEach',
+  'group',
+  'groupToMap',
   'includes',
   'indexOf',
   'join',
@@ -97,8 +102,20 @@ const ARRAY_CONSUME_METHODS = [
   'reduceRight',
   'slice',
   'some',
+  'toString',
   'values',
   'length',
+];
+
+const ARRAY_DIRTY_METHODS = [
+  'sort',
+  'fill',
+  'pop',
+  'push',
+  'shift',
+  'splice',
+  'unshift',
+  'reverse',
 ];
 
 function deepTracked<T extends object>(obj?: T): T | undefined | null {
@@ -116,8 +133,6 @@ function deepTracked<T extends object>(obj?: T): T | undefined | null {
 
   return obj;
 }
-
-const BOUND_FUN = new WeakMap();
 
 const arrayProxyHandler: ProxyHandler<object> = {
   get(target, property, receiver) {
@@ -147,25 +162,32 @@ const arrayProxyHandler: ProxyHandler<object> = {
     }
 
     if (typeof value === 'function') {
-      let existing = BOUND_FUN.get(value);
+      let fnCache = ((target as any)[BOUND_FUN] ||= new WeakMap());
+      let existing = fnCache.get(value);
 
       if (!existing) {
         let fn = (...args: unknown[]) => {
           if (ARRAY_CONSUME_METHODS.includes(property)) {
             readCollection(target);
 
-            return (target as any)[property](...args);
+            return value.call(target, ...args);
           }
 
-          dirtyCollection(target);
+          if (typeof property === 'string') {
+            if (ARRAY_DIRTY_METHODS.includes(property)) {
+              dirtyCollection(target);
+            }
+          }
 
-          return (target as any)[property](...args);
+          return value.call(target, ...args);
         };
 
-        BOUND_FUN.set(value, fn);
+        fnCache.set(value, fn);
 
         return fn;
       }
+
+      return existing;
     }
 
     return value;

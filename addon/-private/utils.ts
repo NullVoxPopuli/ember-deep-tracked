@@ -2,6 +2,7 @@
 import { createStorage, getValue, setValue } from 'ember-tracked-storage-polyfill';
 
 export const STORAGES = Symbol('__ STORAGES __');
+export const BOUND_FUN = Symbol('__ BOUND_FUN __');
 
 const COLLECTION = Symbol('__ COLLECTION __');
 
