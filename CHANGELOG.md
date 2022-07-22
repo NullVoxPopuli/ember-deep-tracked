@@ -1,3 +1,10 @@
+## [1.3.12](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.11...v1.3.12) (2022-07-22)
+
+
+### Bug Fixes
+
+* **arrays:** calling functions on arrays multiple times now behaves consistently ([7fb68a1](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/7fb68a1c160aa27c58b559a32c14cfa402d98286))
+
 ## [1.3.11](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.10...v1.3.11) (2022-01-19)
 
 
