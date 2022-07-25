@@ -323,11 +323,11 @@ module('deep tracked (in templates)', function (hooks) {
           @tracked arr = [];
 
           get filtered() {
-            return this.arr.filter(item => !item.hide)
+            return this.arr.filter((item) => !item.hide);
           }
 
           add = (item) => this.arr.push({ ...item });
-          remove = (item) => item.hide = true;
+          remove = (item) => (item.hide = true);
         }
 
         this.owner.register(
