@@ -131,7 +131,34 @@ module('deep tracked', function (hooks) {
       });
     });
 
-    test('#indexOf', async function (assert) {
+    test('#indexOf works', async function (assert) {
+      assert.expect(2);
+
+      class Foo {
+        @tracked arr = [] as any;
+
+        get item1() {
+          return arr[0];
+        }
+      }
+
+      let instance = new Foo();
+
+      const item1 = { bar: 'baz' };
+      const item2 = { qux: 'norf' };
+
+      instance.arr.push(item1);
+      instance.arr.push(item2);
+
+      let arr = instance.arr;
+      let first = arr.indexOf(instance.item1);
+      let second = arr.indexOf(item2);
+
+      assert.strictEqual(first, 0);
+      assert.strictEqual(second, 0);
+    });
+
+    test('#indexOf works multiple times', async function (assert) {
       assert.expect(2);
 
       class Foo {
@@ -151,6 +178,7 @@ module('deep tracked', function (hooks) {
       assert.strictEqual(first, 0);
       assert.strictEqual(second, 0);
     });
+
   });
 
   test('array data can be re-set', async function (assert) {
