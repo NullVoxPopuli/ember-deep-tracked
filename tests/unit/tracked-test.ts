@@ -155,7 +155,7 @@ module('deep tracked', function (hooks) {
       let second = arr.indexOf(item2);
 
       assert.strictEqual(first, 0);
-      assert.strictEqual(second, 0);
+      assert.strictEqual(second, 1);
     });
 
     test('#indexOf works multiple times', async function (assert) {
