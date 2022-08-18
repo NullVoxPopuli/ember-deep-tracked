@@ -7,13 +7,12 @@
  *
  */
 import {
-  BOUND_FUN,
   dirtyCollection,
+  fnCacheFor,
   hasStorage,
   initStorage,
   readCollection,
   readStorage,
-  STORAGES,
   updateStorage,
 } from './utils';
 
@@ -22,6 +21,7 @@ type DeepTrackedArgs<T> =
   | [Record<string, unknown>]
   | [object, string | symbol, PropertyDescriptor];
 
+type PropertyList = Array<string | number | Symbol>;
 type TrackedProxy<T> = T;
 
 /**
@@ -75,6 +75,11 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
   };
 }
 
+const TARGET = Symbol('TARGET');
+const IS_PROXIED = Symbol('IS_PROXIED');
+
+const SECRET_PROPERTIES: PropertyList = [TARGET, IS_PROXIED];
+
 const ARRAY_COLLECTION_PROPERTIES = ['length'];
 const ARRAY_CONSUME_METHODS = [
   Symbol.iterator,
@@ -118,8 +123,14 @@ const ARRAY_DIRTY_METHODS = [
   'reverse',
 ];
 
-function deepTracked<T extends object>(obj?: T): T | undefined | null {
+const ARRAY_QUERY_METHODS: PropertyList = ['indexOf', 'contains', 'lastIndexOf', 'includes'];
+
+function deepTracked<T extends object>(obj?: T | undefined): T | undefined | null {
   if (obj === null || obj === undefined) {
+    return obj;
+  }
+
+  if (obj[IS_PROXIED as keyof T]) {
     return obj;
   }
 
@@ -134,12 +145,16 @@ function deepTracked<T extends object>(obj?: T): T | undefined | null {
   return obj;
 }
 
-const arrayProxyHandler: ProxyHandler<object> = {
-  get(target, property, receiver) {
+const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
+  get<T extends unknown[]>(target: T, property: keyof T, receiver: T) {
     let value = Reflect.get(target, property, receiver);
 
-    if (property === STORAGES) {
+    if (property === TARGET) {
       return value;
+    }
+
+    if (property === IS_PROXIED) {
+      return true;
     }
 
     if (typeof property === 'string') {
@@ -162,27 +177,31 @@ const arrayProxyHandler: ProxyHandler<object> = {
     }
 
     if (typeof value === 'function') {
-      let fnCache = ((target as any)[BOUND_FUN] ||= new WeakMap());
-      let existing = fnCache.get(value);
+      let fnCache = fnCacheFor(target);
+      let existing = fnCache.get(property);
 
       if (!existing) {
         let fn = (...args: unknown[]) => {
-          if (ARRAY_CONSUME_METHODS.includes(property)) {
-            readCollection(target);
-
-            return value.call(target, ...args);
-          }
-
           if (typeof property === 'string') {
-            if (ARRAY_DIRTY_METHODS.includes(property)) {
+            if (ARRAY_QUERY_METHODS.includes(property)) {
+              readCollection(target);
+
+              let fn = target[property];
+
+              if (typeof fn === 'function') {
+                return fn.call(target, ...args.map(unwrap));
+              }
+            } else if (ARRAY_CONSUME_METHODS.includes(property)) {
+              readCollection(target);
+            } else if (ARRAY_DIRTY_METHODS.includes(property)) {
               dirtyCollection(target);
             }
           }
 
-          return value.call(target, ...args);
+          return Reflect.apply(value, receiver, args);
         };
 
-        fnCache.set(value, fn);
+        fnCache.set(property, fn);
 
         return fn;
       }
@@ -215,6 +234,15 @@ const arrayProxyHandler: ProxyHandler<object> = {
 
     return Reflect.set(target, property, value, receiver);
   },
+  has(target, property) {
+    if (SECRET_PROPERTIES.includes(property)) {
+      return true;
+    }
+
+    readStorage(target, property);
+
+    return property in target;
+  },
   getPrototypeOf() {
     return Array.prototype;
   },
@@ -222,8 +250,12 @@ const arrayProxyHandler: ProxyHandler<object> = {
 
 const objProxyHandler = {
   get<T extends object>(target: T, prop: keyof T, receiver: T) {
-    if (prop === STORAGES) {
-      return Reflect.get(target, prop, receiver);
+    if (prop === TARGET) {
+      return target;
+    }
+
+    if (prop === IS_PROXIED) {
+      return true;
     }
 
     readStorage(target, prop);
@@ -231,6 +263,10 @@ const objProxyHandler = {
     return deepTracked(Reflect.get(target, prop, receiver));
   },
   has<T extends object>(target: T, prop: keyof T) {
+    if (SECRET_PROPERTIES.includes(prop)) {
+      return true;
+    }
+
     readStorage(target, prop);
 
     return prop in target;
@@ -256,6 +292,14 @@ const objProxyHandler = {
 
 const PROXY_CACHE = new WeakMap<any, object>();
 
+function unwrap<T extends object>(obj: T) {
+  if (TARGET in obj) {
+    return obj[TARGET as keyof T];
+  }
+
+  return obj;
+}
+
 function deepProxy<T extends object>(obj: T, handler: ProxyHandler<T>): TrackedProxy<T> {
   let existing = PROXY_CACHE.get(obj);
 
@@ -263,7 +307,7 @@ function deepProxy<T extends object>(obj: T, handler: ProxyHandler<T>): TrackedP
     return existing as T;
   }
 
-  let proxied = new Proxy(obj as object, handler);
+  let proxied = new Proxy(obj, handler);
 
   PROXY_CACHE.set(obj, proxied);
 

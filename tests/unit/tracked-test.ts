@@ -178,7 +178,6 @@ module('deep tracked', function (hooks) {
       assert.strictEqual(first, 0);
       assert.strictEqual(second, 0);
     });
-
   });
 
   test('array data can be re-set', async function (assert) {

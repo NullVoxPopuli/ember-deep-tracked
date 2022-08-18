@@ -319,15 +319,22 @@ module('deep tracked (in templates)', function (hooks) {
       });
 
       test('it works via a getter', async function (assert) {
+        interface Item {
+          hide?: boolean;
+          name: string;
+        }
+
         class Foo extends Component {
-          @tracked arr = [];
+          @tracked arr: Item[] = [];
 
           get filtered() {
-            return this.arr.filter((item) => !item.hide);
+            return this.arr.filter((item) => {
+              return !item.hide;
+            });
           }
 
-          add = (item) => this.arr.push({ ...item });
-          remove = (item) => (item.hide = true);
+          add = (item: Item) => this.arr.push({ ...item });
+          remove = (item: Item) => (item.hide = true);
         }
 
         this.owner.register(

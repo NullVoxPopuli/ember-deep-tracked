@@ -1,21 +1,29 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createStorage, getValue, setValue } from 'ember-tracked-storage-polyfill';
 
-export const STORAGES = Symbol('__ STORAGES __');
-export const BOUND_FUN = Symbol('__ BOUND_FUN __');
+import type { TrackedStorage } from 'ember-tracked-storage-polyfill';
 
 const COLLECTION = Symbol('__ COLLECTION __');
 
 type Key = number | string | symbol;
 
-function ensureStorages(context: any) {
-  let storages = context[STORAGES];
+const STORAGES_CACHE = new WeakMap<
+  object | Array<unknown>,
+  // The tracked storage for an object or array.
+  // ie: TrackedArray, TrackedObject, but all in one
+  Map<Key, TrackedStorage<unknown>>
+>();
 
-  if (!storages) {
-    context[STORAGES] = new Map();
+function ensureStorages(context: any) {
+  let existing = STORAGES_CACHE.get(context);
+
+  if (!existing) {
+    existing = new Map();
+    STORAGES_CACHE.set(context, existing);
   }
 
-  return context[STORAGES];
+  return existing;
 }
 
 function storageFor(context: any, key: Key) {
@@ -27,12 +35,11 @@ function storageFor(context: any, key: Key) {
 export function initStorage(context: any, key: Key, initialValue: any = null) {
   let storages = ensureStorages(context);
 
-  storages.set(
-    key,
-    createStorage(initialValue, () => false)
-  );
+  let initialStorage = createStorage(initialValue, () => false);
 
-  return getValue(storages.get(key));
+  storages.set(key, initialStorage);
+
+  return getValue(initialStorage);
 }
 
 export function hasStorage(context: any, key: Key) {
@@ -75,4 +82,17 @@ export function dirtyCollection(context: any) {
   }
 
   return updateStorage(context, COLLECTION, context);
+}
+
+const BOUND_FUNS = new WeakMap<object, Map<Key, unknown>>();
+
+export function fnCacheFor<T extends object = object>(context: T) {
+  let fnCache = BOUND_FUNS.get(context);
+
+  if (!fnCache) {
+    fnCache = new Map();
+    BOUND_FUNS.set(context, fnCache);
+  }
+
+  return fnCache; // as Map<keyof T, T[keyof T]>;
 }
