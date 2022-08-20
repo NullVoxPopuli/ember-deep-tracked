@@ -52,11 +52,11 @@ module('retention test', function (hooks) {
     this.set('counter', () => {
       counter++;
     });
-    assert.equal(counter, 0);
+    assert.strictEqual(counter, 0);
     await render(hbs`<Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
 
     assert.dom('out').hasText('abc');
-    assert.equal(counter, 1);
+    assert.strictEqual(counter, 1);
   });
 
   test('test b', async function (assert) {
@@ -67,10 +67,10 @@ module('retention test', function (hooks) {
     this.set('counter', () => {
       counter++;
     });
-    assert.equal(counter, 0);
+    assert.strictEqual(counter, 0);
     await render(hbs`<Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
 
     assert.dom('out').hasText('def');
-    assert.equal(counter, 1);
+    assert.strictEqual(counter, 1);
   });
 });
