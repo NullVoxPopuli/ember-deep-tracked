@@ -1,3 +1,10 @@
+## [1.3.14](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.13...v1.3.14) (2022-08-20)
+
+
+### Bug Fixes
+
+* **arrays:** accessing properties on arrays ([a236b31](https://github.com/NullVoxPopuli/ember-deep-tracked/commit/a236b311046387ad5a97f5933fc5dcc5af707778))
+
 ## [1.3.13](https://github.com/NullVoxPopuli/ember-deep-tracked/compare/v1.3.12...v1.3.13) (2022-07-22)
 
 
