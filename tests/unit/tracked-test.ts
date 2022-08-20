@@ -26,19 +26,19 @@ module('deep tracked', function (hooks) {
 
       instance.obj.foo = { bar: 3 };
       await settled();
-      assert.equal(instance.objDeep, 3);
+      assert.strictEqual(instance.objDeep, 3);
 
       instance.obj.foo = { bar: 4 };
       await settled();
-      assert.equal(instance.objDeep, 4);
+      assert.strictEqual(instance.objDeep, 4);
 
       instance.obj = { foo: { bar: 5 } };
       await settled();
-      assert.equal(instance.objDeep, 5);
+      assert.strictEqual(instance.objDeep, 5);
 
       instance.obj.foo = { bar: 4 };
       await settled();
-      assert.equal(instance.objDeep, 4);
+      assert.strictEqual(instance.objDeep, 4);
     });
 
     test('object access in an array', async function (assert) {
