@@ -32,6 +32,11 @@
     "yarn": "1.22.17",
     "npm": "8.15.0"
   },
+  "pnpm": {
+    "overrides": {
+      "@types/eslint": "^7.0.0"
+    }
+  },
   "engines": {
     "node": "10.* || >= 12"
   }
