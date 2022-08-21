@@ -7,7 +7,6 @@
   "scripts": {
     "ci:update": "npx ember-ci-update",
 
-    "prepare": "pnpm build",
     "build": "pnpm --filter ember-deep-tracked build",
 
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
