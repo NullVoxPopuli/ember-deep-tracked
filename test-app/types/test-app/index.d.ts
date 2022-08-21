@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import type Ember from 'ember';
 import 'ember-cached-decorator-polyfill';
 
 declare global {

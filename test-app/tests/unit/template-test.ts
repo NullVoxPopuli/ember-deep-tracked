@@ -241,7 +241,7 @@ module('deep tracked (in templates)', function (hooks) {
             debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
 
             return this.obj.children[0].property.splice(1, 1);
-          }
+          };
 
           get output() {
             debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
