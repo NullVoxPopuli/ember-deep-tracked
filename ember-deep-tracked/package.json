@@ -1,0 +1,98 @@
+{
+  "name": "ember-deep-tracked",
+  "version": "1.3.14",
+  "description": "The tracking hammer",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "https://github.com/NullVoxPopuli/ember-deep-tracked",
+  "license": "MIT",
+  "author": "NullVoxPopuli",
+  "files": [
+    "addon-main.js",
+    "dist"
+  ],
+  "scripts": {
+    "release": "semantic-release",
+    "build": "FORCE_COLOR=1 npm-run-all --aggregate-output --parallel \"build:*\"",
+    "build:js": "rollup --config",
+    "build:docs": "cp ../README.md ./README.md",
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
+    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "start": "rollup --config --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'",
+    "prepare": "pnpm run build",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.17.8",
+    "@embroider/addon-shim": "^1.0.0",
+    "@embroider/macros": "^1.8.3",
+    "ember-tracked-storage-polyfill": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.0",
+    "@babel/plugin-syntax-decorators": "^7.17.0",
+    "@babel/plugin-transform-typescript": "7.18.12",
+    "@babel/preset-typescript": "7.18.6",
+    "@embroider/addon-dev": "^1.0.0",
+    "@nullvoxpopuli/eslint-configs": "^2.2.40",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@tsconfig/ember": "^1.0.1",
+    "ember-template-lint": "^4.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ember": "^10.5.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.7.1",
+    "rollup": "^2.67.0",
+    "rollup-plugin-ts": "3.0.2",
+    "semantic-release": "^19.0.2",
+    "typescript": "4.7.4"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "volta": {
+    "extends": "../package.json"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "types": "dist"
+}

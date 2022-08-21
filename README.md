@@ -11,8 +11,9 @@ without updates, deeply tracking will increase initial-render time.
 
 ## Compatibility
 
-* Ember.js v3.13+
-* TypeScript v4.2+
+* Ember.js v3.25+
+* TypeScript v4.5+
+* ember-auto-import v2+
 * [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) support
 
 ## Installation
@@ -21,6 +22,8 @@ without updates, deeply tracking will increase initial-render time.
 npm install ember-deep-tracked
 # or
 yarn add ember-deep-tracked
+# or
+pnpm add ember-deep-tracked
 # or
 ember install ember-deep-tracked
 ```
