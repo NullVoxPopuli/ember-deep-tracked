@@ -17,17 +17,15 @@ module('deep tracked (in templates)', function (hooks) {
       class Foo extends Component {
         @tracked obj = {} as any;
       }
-      this.owner.register(
-        'component:foo',
-        setComponentTemplate(
-          hbs`<button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
+
+      setComponentTemplate(
+        hbs`<button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
 
               <out>{{this.obj.foo.bar}}</out>`,
-          Foo
-        )
+        Foo
       );
 
-      this.setProperties({ setNext: () => {} });
+      this.setProperties({ Foo, setNext: () => {} });
 
       const doThing = async (callback: (data: Foo) => void) => {
         this.setProperties({ setNext: callback });
@@ -36,7 +34,7 @@ module('deep tracked (in templates)', function (hooks) {
         await click('button');
       };
 
-      await render(hbs`<Foo @setNext={{this.setNext}}/>`);
+      await render(hbs`<this.Foo @setNext={{this.setNext}}/>`);
 
       assert.dom('out').hasNoText();
 
@@ -59,10 +57,8 @@ module('deep tracked (in templates)', function (hooks) {
           array: [],
         } as any;
       }
-      this.owner.register(
-        'component:foo',
-        setComponentTemplate(
-          hbs`
+      setComponentTemplate(
+        hbs`
             <button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
 
             <ul>
@@ -70,11 +66,10 @@ module('deep tracked (in templates)', function (hooks) {
                 <li>{{item}}</li>
               {{/each}}
             </ul>`,
-          Foo
-        )
+        Foo
       );
 
-      this.setProperties({ setNext: () => {} });
+      this.setProperties({ Foo, setNext: () => {} });
 
       const doThing = async (callback: (data: Foo) => void) => {
         this.setProperties({ setNext: callback });
@@ -83,7 +78,7 @@ module('deep tracked (in templates)', function (hooks) {
         await click('button');
       };
 
-      await render(hbs`<Foo @setNext={{this.setNext}}/>`);
+      await render(hbs`<this.Foo @setNext={{this.setNext}}/>`);
 
       assert.dom('li').doesNotExist();
       await doThing((instance) => {
@@ -163,17 +158,15 @@ module('deep tracked (in templates)', function (hooks) {
 
           slice = () => (this.obj = this.obj.slice(1));
         }
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
-            Foo
-          )
+          Foo
         );
 
-        await render(hbs`<Foo />`);
+        this.setProperties({ Foo });
+        await render(hbs`<this.Foo />`);
 
         assert.dom('out').hasText('0,1,3');
 
@@ -197,17 +190,15 @@ module('deep tracked (in templates)', function (hooks) {
             return this.obj.children[0].property;
           }
         }
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.output}}</out>`,
-            Foo
-          )
+          Foo
         );
 
-        await render(hbs`<Foo />`);
+        this.setProperties({ Foo });
+        await render(hbs`<this.Foo />`);
 
         assert.dom('out').hasText('0,1,3');
 
@@ -224,17 +215,16 @@ module('deep tracked (in templates)', function (hooks) {
 
           splice = () => this.obj.splice(1, 1);
         }
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
-            Foo
-          )
+          Foo
         );
 
-        await render(hbs`<Foo />`);
+        this.setProperties({ Foo });
+
+        await render(hbs`<this.Foo />`);
 
         assert.dom('out').hasText('0,1,3');
 
@@ -259,17 +249,15 @@ module('deep tracked (in templates)', function (hooks) {
             return this.obj.children[0].property;
           }
         }
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.output}}</out>`,
-            Foo
-          )
+          Foo
         );
 
-        await render(hbs`<Foo />`);
+        this.setProperties({ Foo });
+        await render(hbs`<this.Foo />`);
 
         assert.dom('out').hasText('0,1,3');
 
@@ -309,20 +297,19 @@ module('deep tracked (in templates)', function (hooks) {
             }));
         }
 
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`<button type="button" {{on 'click' this.changeValue}}>thing</button>
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.changeValue}}>thing</button>
 
             {{#each this.arr as |item index|}}
             <div id={{concat "item" index}}>{{item.prop}}</div>
             {{/each}}
             `,
-            Foo
-          )
+          Foo
         );
 
-        await render(hbs`<Foo />`);
+        this.setProperties({ Foo });
+
+        await render(hbs`<this.Foo />`);
 
         assert.dom('#item1').hasText('bar');
 
@@ -350,10 +337,8 @@ module('deep tracked (in templates)', function (hooks) {
           remove = (item: Item) => (item.hide = true);
         }
 
-        this.owner.register(
-          'component:foo',
-          setComponentTemplate(
-            hbs`
+        setComponentTemplate(
+          hbs`
             <button
               type="button"
               class="add"
@@ -375,11 +360,11 @@ module('deep tracked (in templates)', function (hooks) {
               </div>
             {{/each}}
             `,
-            Foo
-          )
+          Foo
         );
+        this.setProperties({ Foo });
 
-        await render(hbs`<Foo />`);
+        await render(hbs`<this.Foo />`);
 
         await click('.add');
         await click('.add');

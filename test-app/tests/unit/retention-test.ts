@@ -41,7 +41,7 @@ module('retention test', function (hooks) {
   setComponentTemplate(hbs`<out>{{this.obj.category.ident}}</out>`, Foo);
 
   hooks.beforeEach(function () {
-    this.owner.register('component:foo', Foo);
+    this.setProperties({ Foo });
   });
 
   test('test a', async function (assert) {
@@ -53,7 +53,7 @@ module('retention test', function (hooks) {
       counter++;
     });
     assert.strictEqual(counter, 0);
-    await render(hbs`<Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
+    await render(hbs`<this.Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
 
     assert.dom('out').hasText('abc');
     assert.strictEqual(counter, 1);
@@ -68,7 +68,7 @@ module('retention test', function (hooks) {
       counter++;
     });
     assert.strictEqual(counter, 0);
-    await render(hbs`<Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
+    await render(hbs`<this.Foo @foo={{this.foo}} @counter={{this.counter}}/>`);
 
     assert.dom('out').hasText('def');
     assert.strictEqual(counter, 1);

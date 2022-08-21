@@ -21,21 +21,21 @@ module('deep tracked (in templates)', function (hooks) {
         this.obj.bar = 'bam';
       }
     }
-    this.owner.register(
-      'component:foo',
-      setComponentTemplate(
-        hbs`
+
+    setComponentTemplate(
+      hbs`
         <button {{on 'click' this.bam}}>thing</button>
         <out>Hello {{this.obj.bar}}</out>
       `,
-        Foo
-      )
+      Foo
     );
+
+    this.setProperties({ Foo });
 
     const foo = { bar: 'baz' };
 
     this.set('foo', foo);
-    await render(hbs`<Foo @foo={{this.foo}}/>`);
+    await render(hbs`<this.Foo @foo={{this.foo}}/>`);
 
     assert.dom('out').hasText('Hello baz');
 
