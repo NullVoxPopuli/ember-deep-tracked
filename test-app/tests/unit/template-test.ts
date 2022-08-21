@@ -268,7 +268,8 @@ module('deep tracked (in templates)', function (hooks) {
 
       test('it works on nested array being immutably re-set', async function (assert) {
         class Foo extends Component {
-          @tracked arr = [
+          @tracked
+          arr = [
             {
               id: 0,
               prop: 'foo',

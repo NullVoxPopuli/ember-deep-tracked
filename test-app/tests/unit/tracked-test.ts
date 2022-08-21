@@ -58,7 +58,7 @@ module('deep tracked', function (hooks) {
       instance.arr.push({ foo: { bar: 2 } });
       await settled();
 
-      assert.equal(instance.arrDeep, 2);
+      assert.strictEqual(instance.arrDeep, 2);
     });
 
     test('undefined to object', async function (assert) {
@@ -199,7 +199,8 @@ module('deep tracked', function (hooks) {
 
   test('array data can be immutably treated', async function (assert) {
     class Foo {
-      @tracked arr: { id: number; prop: string }[] = [
+      @tracked
+      arr: { id: number; prop: string }[] = [
         {
           id: 1,
           prop: 'foo',
