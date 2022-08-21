@@ -1,37 +1,64 @@
-ember-deep-tracked
-==============================================================================
+# ember-deep-tracked
 
-[Short description of the addon.]
+[![npm version](https://badge.fury.io/js/ember-deep-tracked.svg)](https://badge.fury.io/js/ember-deep-tracked)
+[![CI](https://github.com/NullVoxPopuli/ember-deep-tracked/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/NullVoxPopuli/ember-deep-tracked/actions/workflows/ci.yml)
 
+Deep tracking using proxies for complex objects for when you want _everything_ to be reactive, at the cost of performance.
 
-Compatibility
-------------------------------------------------------------------------------
+This is not recommended for performance-sensitive situations such as rendering a
+table from a large data set where updates to that data set are frequent. Even
+without updates, deeply tracking will increase initial-render time.
 
-* Ember.js v3.24 or above
-* Embroider or ember-auto-import v2
+## Compatibility
 
+* Ember.js v3.13+
+* TypeScript v4.2+
+* [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) support
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
-```
+```bash
+npm install ember-deep-tracked
+# or
+yarn add ember-deep-tracked
+# or
 ember install ember-deep-tracked
 ```
 
+## Usage
 
-Usage
-------------------------------------------------------------------------------
+```js
+import { tracked } from 'ember-deep-tracked';
 
-[Longer description of how to use the addon in apps.]
+class Foo {
+  @tracked obj = { bar: 2 };
+}
+```
+or in a component:
+```js
+import { tracked } from 'ember-deep-tracked';
+import Component from '@glimmer/component';
 
+export default class Foo extends Component {
+  @tracked obj = { bar: 2 };
+}
+```
+```hbs
+{{this.obj.bar}} <- automatically updates when "obj.bar" changes
+```
+using this decorator form will track the _reference_, like `tracked` from `@glimmer/tracking` does, and then also deeply tracks the value.
 
-Contributing
-------------------------------------------------------------------------------
+the entire object and any sub object can be swapped with other objects and they'll be automatically tracked.
+
+`import { deepTracked } from 'ember-deep-tracked';`
+
+is also available, and is an alias of `tracked`
+
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
