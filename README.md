@@ -11,7 +11,7 @@ without updates, deeply tracking will increase initial-render time.
 
 ## Compatibility
 
-* Ember.js v3.13+
+* Ember.js v3.25+
 * TypeScript v4.5+
 * ember-auto-import v2+
 * [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) support
