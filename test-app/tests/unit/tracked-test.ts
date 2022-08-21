@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cached } from '@glimmer/tracking';
+import { assert as debugAssert } from '@ember/debug';
 import { settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
@@ -115,10 +115,16 @@ module('deep tracked', function (hooks) {
         class Foo {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
-          splice = () => this.obj.children[0].property.splice(1, 1);
+          splice = () => {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+
+            return this.obj.children[0].property.splice(1, 1);
+          };
 
           @cached
           get output() {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+
             return this.obj.children[0].property;
           }
         }

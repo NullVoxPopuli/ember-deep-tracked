@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Component from '@glimmer/component';
+// @ts-ignore
 import { setComponentTemplate } from '@ember/component';
+import { assert as debugAssert } from '@ember/debug';
 import { click, render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
@@ -140,13 +141,15 @@ module('deep tracked (in templates)', function (hooks) {
 
         assert.dom('li').exists({ count: 3 });
 
-        myArray[0].push(4);
+        myArray[0]?.push(4);
 
         await settled();
 
         assert.dom('li').exists({ count: 4 });
 
         assert.dom().hasText('1 2 3 4');
+
+        debugAssert(`myArray failed to contain a nested array`, myArray[0]);
         myArray[0][2] = 5;
         await settled();
         assert.dom().hasText('1 2 5 4');
@@ -184,10 +187,13 @@ module('deep tracked (in templates)', function (hooks) {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
           slice = () => {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
             this.obj.children[0].property = this.obj.children[0].property.slice(1);
           };
 
           get output() {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+
             return this.obj.children[0].property;
           }
         }
@@ -241,9 +247,15 @@ module('deep tracked (in templates)', function (hooks) {
         class Foo extends Component {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
-          splice = () => this.obj.children[0].property.splice(1, 1);
+          splice = () => {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+
+            return this.obj.children[0].property.splice(1, 1);
+          }
 
           get output() {
+            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+
             return this.obj.children[0].property;
           }
         }

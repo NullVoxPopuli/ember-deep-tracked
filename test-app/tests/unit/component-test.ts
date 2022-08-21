@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Component from '@glimmer/component';
+// @ts-ignore
 import { setComponentTemplate } from '@ember/component';
 import { action } from '@ember/object';
 import { click, render } from '@ember/test-helpers';

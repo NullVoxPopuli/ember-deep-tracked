@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Component from '@glimmer/component';
+// @ts-ignore
 import { setComponentTemplate } from '@ember/component';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
