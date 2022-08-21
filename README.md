@@ -23,6 +23,8 @@ npm install ember-deep-tracked
 # or
 yarn add ember-deep-tracked
 # or
+pnpm add ember-deep-tracked
+# or
 ember install ember-deep-tracked
 ```
 
