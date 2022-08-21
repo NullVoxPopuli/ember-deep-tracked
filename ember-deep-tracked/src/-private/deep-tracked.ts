@@ -292,7 +292,7 @@ const objProxyHandler = {
 
 const PROXY_CACHE = new WeakMap<any, object>();
 
-function unwrap<T extends object>(obj: T) {
+function unwrap<T>(obj: T) {
   if (TARGET in obj) {
     return obj[TARGET as keyof T];
   }

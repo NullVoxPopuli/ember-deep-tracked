@@ -13,11 +13,12 @@ lint:
     - "./test-app"
 
 build:
-  run: 'pnpm run build:js'
+  run: 'pnpm build:js'
   expect: |
     index.js
     index.js.map
     index.d.ts
+    index.d.ts.map
 
 support:
   ember-try: true

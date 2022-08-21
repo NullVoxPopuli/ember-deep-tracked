@@ -90,12 +90,13 @@ jobs:
         run: |-
           echo 'target: ember-deep-tracked/dist
           setup:
-            run: pnpm run build:js
+            run: pnpm build:js
             cwd: ./ember-deep-tracked
           expect: |
             index.js
             index.js.map
             index.d.ts
+            index.d.ts.map
           ' >> assert-contents.config.yml
                         npx assert-folder-contents
       - uses: actions/upload-artifact@v3
