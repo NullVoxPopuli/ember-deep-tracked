@@ -124,7 +124,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
       - name: Download built package from cache
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
@@ -150,7 +150,7 @@ jobs:
       - name: Install Dependencies (without lockfile)
         run: rm pnpm-lock.yaml && pnpm install
       - name: Download built package from cache
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
@@ -188,7 +188,7 @@ jobs:
       - name: Install Dependencies (without lockfile)
         run: rm pnpm-lock.yaml && pnpm install
       - name: Download built package from cache
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
@@ -227,7 +227,7 @@ jobs:
       - name: Install Dependencies (without frozen lockfile)
         run: pnpm install --no-frozen-lockfile
       - name: Download built package from cache
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
@@ -265,7 +265,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
       - name: Download built package from cache
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
