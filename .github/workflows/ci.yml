@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -41,7 +41,7 @@ jobs:
           - ./ember-deep-tracked
           - ./test-app
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -61,7 +61,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: volta-cli/action@v3
@@ -73,7 +73,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -110,7 +110,7 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -136,7 +136,7 @@ jobs:
     needs:
       - build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -174,7 +174,7 @@ jobs:
           - embroider-safe
           - embroider-optimized
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -213,7 +213,7 @@ jobs:
           - typescript@4.7
           - typescript@next
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: volta-cli/action@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -249,7 +249,7 @@ jobs:
       - try-scenarios
       - floating-deps-tests
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: volta-cli/action@v3
