@@ -99,7 +99,7 @@ jobs:
             index.d.ts.map
           ' >> assert-contents.config.yml
                         npx assert-folder-contents
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: ${{ env.dist }}
