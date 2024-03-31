@@ -65,7 +65,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: volta-cli/action@v3
-      - uses: wagoid/commitlint-github-action@v5.0.2
+      - uses: wagoid/commitlint-github-action@v5.5.1
   build:
     name: Build Tests
     needs:
