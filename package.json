@@ -6,15 +6,11 @@
   "author": "NullVoxPopuli",
   "scripts": {
     "ci:update": "npx ember-ci-update",
-
     "build": "pnpm --filter ember-deep-tracked build",
-
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
     "start:tests": "pnpm --filter test-app start",
     "start:addon": "pnpm --filter ember-deep-tracked start --no-watch.clearScreen",
-
     "test": "pnpm --filter test-app test",
-
     "lint": "pnpm --filter '*' lint",
     "lint:fix": "pnpm --filter '*' lint:fix"
   },
@@ -27,9 +23,10 @@
     "test-app"
   ],
   "volta": {
-    "node": "16.18.1",
+    "node": "22.8.0",
     "yarn": "1.22.19",
-    "npm": "8.19.4"
+    "npm": "8.19.4",
+    "pnpm": "9.9.0"
   },
   "pnpm": {
     "overrides": {
