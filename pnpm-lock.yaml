@@ -128,7 +128,7 @@ importers:
         specifier: ^2.0.0
         version: 2.1.0
       '@ember/test-helpers':
-        specifier: ^2.8.1
+        specifier: ^2.9.4
         version: 2.9.4(@babel/core@7.25.2)(ember-source@4.6.0(@babel/core@7.25.2)(webpack@5.94.0))
       '@embroider/test-setup':
         specifier: 1.8.3
@@ -217,9 +217,6 @@ importers:
       '@types/ember__test':
         specifier: ^4.0.0
         version: 4.0.6(@babel/core@7.25.2)
-      '@types/ember__test-helpers':
-        specifier: ^2.8.1
-        version: 2.9.1(@babel/core@7.25.2)(ember-source@4.6.0(@babel/core@7.25.2)(webpack@5.94.0))
       '@types/ember__utils':
         specifier: ^4.0.0
         version: 4.0.7(@babel/core@7.25.2)
