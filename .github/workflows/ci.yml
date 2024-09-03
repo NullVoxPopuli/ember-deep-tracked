@@ -46,6 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
+      - run: pnpm build
       - run: pnpm --filter test-app run test:ember
 
   floating-deps-tests:
@@ -59,6 +60,7 @@ jobs:
       - uses: wyvox/action-setup-pnpm@v3
         with:
           args: '--no-lockfile'
+      - run: pnpm build
       - run: pnpm --filter test-app run test:ember
 
   try-scenarios:
@@ -82,9 +84,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
-      - name: test
+      - run: pnpm build
+      - run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }}
         working-directory: ./test-app
-        run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }}
           --skip-cleanup
 
   typescript-compatibility:
