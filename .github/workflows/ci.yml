@@ -6,6 +6,8 @@ on:
       - main
       - master
   pull_request: {}
+  schedule:
+    - cron: "0 3 * * 0 "
 
 concurrency:
    group: ci-${{ github.head_ref || github.ref }}
