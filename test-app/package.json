@@ -22,7 +22,7 @@
     "test:watch": "ember test --server"
   },
   "dependencies": {
-    "ember-deep-tracked": ""
+    "ember-deep-tracked": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",

@@ -112,8 +112,8 @@ importers:
   test-app:
     dependencies:
       ember-deep-tracked:
-        specifier: ''
-        version: 2.0.0
+        specifier: workspace:*
+        version: link:../ember-deep-tracked
     devDependencies:
       '@babel/core':
         specifier: ^7.17.0
@@ -3855,9 +3855,6 @@ packages:
   ember-data@4.4.3:
     resolution: {integrity: sha512-Z67pYs41LoJ2EKQsTOb2QOmv7A4gn72nv9MORYpQnGk8z8stYGtrgZFwATg+NES4mnJsLShdLIWaZNKze7c1HA==}
     engines: {node: 12.* || >= 14.*}
-
-  ember-deep-tracked@2.0.0:
-    resolution: {integrity: sha512-infYaX2IWg/UdA2dWmwEZwxsxXvkrtQrEKDQB4YwbBrkgkIjUSWkDVCLw0cOZrz+dNe2npjlqJNY3v+m14VIqg==}
 
   ember-destroyable-polyfill@2.0.3:
     resolution: {integrity: sha512-TovtNqCumzyAiW0/OisSkkVK93xnVF4NRU6+FN0ubpfwEOpRrmM2RqDwXI6YAChCgSHON1cz0DfQStpA1Gjuuw==}
@@ -13737,16 +13734,6 @@ snapshots:
       - ember-source
       - supports-color
       - webpack
-
-  ember-deep-tracked@2.0.0:
-    dependencies:
-      '@babel/runtime': 7.25.6
-      '@embroider/addon-shim': 1.8.9
-      '@embroider/macros': 1.16.6
-      ember-tracked-storage-polyfill: 1.0.0
-    transitivePeerDependencies:
-      - '@glint/template'
-      - supports-color
 
   ember-destroyable-polyfill@2.0.3(@babel/core@7.25.2):
     dependencies:
