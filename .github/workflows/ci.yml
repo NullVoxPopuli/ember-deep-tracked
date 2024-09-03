@@ -93,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     needs:
-      - build
+      - tests
     strategy:
       fail-fast: true
       matrix:
