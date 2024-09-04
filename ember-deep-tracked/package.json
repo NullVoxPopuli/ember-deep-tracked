@@ -10,7 +10,8 @@
   "author": "NullVoxPopuli",
   "files": [
     "addon-main.js",
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "start": "pnpm vite build --watch",
