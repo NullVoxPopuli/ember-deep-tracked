@@ -50,6 +50,7 @@ module.exports = async function () {
         name: 'ember-lts-5.4',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -64,6 +65,7 @@ module.exports = async function () {
         name: 'ember-lts-5.8',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -78,6 +80,7 @@ module.exports = async function () {
         name: 'ember-release',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -92,6 +95,7 @@ module.exports = async function () {
         name: 'ember-beta',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -106,6 +110,7 @@ module.exports = async function () {
         name: 'ember-canary',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
