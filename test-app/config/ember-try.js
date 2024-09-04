@@ -51,6 +51,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
             'ember-cli-app-version': '^7.0.0',
             'ember-qunit': '^8.1.0',
@@ -64,6 +65,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
             'ember-cli-app-version': '^7.0.0',
             'ember-qunit': '^8.1.0',
@@ -77,6 +79,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
             'ember-cli-app-version': '^7.0.0',
             'ember-qunit': '^8.1.0',
@@ -90,6 +93,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
             'ember-cli-app-version': '^7.0.0',
             'ember-qunit': '^8.1.0',
@@ -103,6 +107,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
             'ember-cli-app-version': '^7.0.0',
             'ember-qunit': '^8.1.0',
