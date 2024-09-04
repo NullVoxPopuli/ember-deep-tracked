@@ -31,7 +31,7 @@
     "ember-tracked-storage-polyfill": "^1.0.0"
   },
   "devDependencies": {
-    "@embroider/addon-dev": "^5.0.0",
+    "@babel/core": "^7.17.0",
     "@nullvoxpopuli/eslint-configs": "^4.2.0",
     "@tsconfig/ember": "^3.0.8",
     "eslint": "^8.0.0",
