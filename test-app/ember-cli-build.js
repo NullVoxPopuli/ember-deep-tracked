@@ -23,7 +23,18 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  const { maybeEmbroider } = require('@embroider/test-setup');
+  const { Webpack } = require('@embroider/webpack');
 
-  return maybeEmbroider(app);
+  return require('@embroider/compat').compatBuild(app, Webpack, {
+    extraPublicTrees: [],
+    staticAddonTrees: true,
+    staticAddonTestSupportTrees: true,
+    staticHelpers: true,
+    staticModifiers: true,
+    staticComponents: true,
+    staticEmberSource: true,
+    packagerOptions: {
+      webpackConfig: { devtool: 'source-map' },
+    },
+  });
 };

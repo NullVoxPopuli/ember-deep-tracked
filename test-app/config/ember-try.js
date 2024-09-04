@@ -1,7 +1,6 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
-const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
@@ -53,7 +52,10 @@ module.exports = async function () {
           devDependencies: {
             '@ember/string': '^4.0.0',
             'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
             'ember-source': '~4.5.0',
+            'ember-cli': '^5.11.0',
           },
         },
       },
@@ -63,7 +65,10 @@ module.exports = async function () {
           devDependencies: {
             '@ember/string': '^4.0.0',
             'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
             'ember-source': '~5.8.0',
+            'ember-cli': '^5.11.0',
           },
         },
       },
@@ -73,6 +78,9 @@ module.exports = async function () {
           devDependencies: {
             '@ember/string': '^4.0.0',
             'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('release'),
           },
         },
@@ -83,6 +91,9 @@ module.exports = async function () {
           devDependencies: {
             '@ember/string': '^4.0.0',
             'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('beta'),
           },
         },
@@ -93,12 +104,13 @@ module.exports = async function () {
           devDependencies: {
             '@ember/string': '^4.0.0',
             'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('canary'),
           },
         },
       },
-      embroiderSafe(),
-      embroiderOptimized(),
     ],
   };
 };
