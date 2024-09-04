@@ -116,14 +116,20 @@ module('deep tracked', function (hooks) {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
           splice = () => {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
 
             return this.obj.children[0].property.splice(1, 1);
           };
 
           @cached
           get output() {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
 
             return this.obj.children[0].property;
           }
@@ -138,8 +144,6 @@ module('deep tracked', function (hooks) {
     });
 
     test('#indexOf works', async function (assert) {
-      assert.expect(2);
-
       class Foo {
         @tracked arr = [] as any;
 
@@ -165,8 +169,6 @@ module('deep tracked', function (hooks) {
     });
 
     test('#indexOf works multiple times', async function (assert) {
-      assert.expect(2);
-
       class Foo {
         @tracked arr = [] as any;
       }
@@ -205,8 +207,7 @@ module('deep tracked', function (hooks) {
 
   test('array data can be immutably treated', async function (assert) {
     class Foo {
-      @tracked
-      arr: { id: number; prop: string }[] = [
+      @tracked arr: { id: number; prop: string }[] = [
         {
           id: 1,
           prop: 'foo',
