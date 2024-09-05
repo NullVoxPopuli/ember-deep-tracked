@@ -203,9 +203,7 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
               let fn = target[property];
 
               if (typeof fn === "function") {
-                // SAFETY: unwrap will no-op if the object to unwrap doesn't have
-                //         the secret proxy property.
-                return fn.call(target, ...(args as object[]).map(unwrap));
+                return fn.call(target, ...args.map(unwrap));
               }
             } else if (ARRAY_CONSUME_METHODS.includes(property)) {
               readCollection(target);
@@ -315,7 +313,15 @@ const objProxyHandler = {
 
 const PROXY_CACHE = new WeakMap<any, object>();
 
-function unwrap<T extends object>(obj: T) {
+function unwrap<T>(obj: T) {
+  if (typeof obj !== "object") {
+    return obj;
+  }
+
+  if (obj === null) {
+    return obj;
+  }
+
   if (TARGET in obj) {
     return obj[TARGET as keyof T];
   }

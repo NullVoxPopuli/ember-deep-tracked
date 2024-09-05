@@ -433,7 +433,7 @@ module('deep tracked (in templates)', function (hooks) {
 
         await render(hbs`<this.Foo />`);
 
-        assert.dom('out').hasText('false');
+        assert.dom('out').hasText('');
 
         await click('button');
 
