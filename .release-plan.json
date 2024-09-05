@@ -1,0 +1,21 @@
+{
+  "solution": {
+    "ember-deep-tracked": {
+      "impact": "patch",
+      "oldVersion": "2.0.0",
+      "newVersion": "2.0.1",
+      "constraints": [
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./ember-deep-tracked/package.json"
+    }
+  },
+  "description": "## Release (2024-09-05)\n\nember-deep-tracked 2.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-deep-tracked`, `test-app`\n  * [#357](https://github.com/NullVoxPopuli/ember-deep-tracked/pull/357) Fix dynamic usage of Array.prototype.includes ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `test-app`\n  * [#356](https://github.com/NullVoxPopuli/ember-deep-tracked/pull/356) Use better types ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `ember-deep-tracked`\n  * [#355](https://github.com/NullVoxPopuli/ember-deep-tracked/pull/355) Broaden Support (forward) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* Other\n  * [#353](https://github.com/NullVoxPopuli/ember-deep-tracked/pull/353) npx create-release-plan-setup@latest --update ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#352](https://github.com/NullVoxPopuli/ember-deep-tracked/pull/352) Upgrade to pnpm 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+}
