@@ -388,5 +388,57 @@ module('deep tracked (in templates)', function (hooks) {
         assert.dom('.item').exists({ count: 1 });
       });
     });
+
+    module('#includes', function () {
+      test('it works', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = [1, 2, 3] as any;
+
+          has = (num: number) => this.obj.includes(num);
+          update = () => this.obj.push(this.obj.length + 1);
+        }
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.update}}>thing</button>
+
+            <out>{{ this.has 4}}</out>`,
+          Foo,
+        );
+
+        this.setProperties({ Foo });
+
+        await render(hbs`<this.Foo />`);
+
+        assert.dom('out').hasText('false');
+
+        await click('button');
+
+        assert.dom('out').hasText('true');
+      });
+
+      test('it works when the array does not exist initially', async function (assert) {
+        class Foo extends Component {
+          @tracked obj = {} as any;
+
+          has = (num: number) => this.obj.arr?.includes?.(num);
+          update = () => (this.obj.arr = [1, 2, 3, 4]);
+        }
+        setComponentTemplate(
+          hbs`<button type="button" {{on 'click' this.update}}>thing</button>
+
+            <out>{{ this.has 4}}</out>`,
+          Foo,
+        );
+
+        this.setProperties({ Foo });
+
+        await render(hbs`<this.Foo />`);
+
+        assert.dom('out').hasText('false');
+
+        await click('button');
+
+        assert.dom('out').hasText('true');
+      });
+    });
   });
 });
