@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-types */
 
 /**
  * TODO: decorators and TS are... fun
@@ -14,14 +13,14 @@ import {
   readCollection,
   readStorage,
   updateStorage,
-} from './utils';
+} from "./utils";
 
 type DeepTrackedArgs<T> =
   | [T[]]
   | [Record<string, unknown>]
   | [object, string | symbol, PropertyDescriptor];
 
-type PropertyList = Array<string | number | Symbol>;
+type PropertyList = Array<string | number | symbol>;
 type TrackedProxy<T> = T;
 
 /**
@@ -37,7 +36,9 @@ export function tracked<T>(arr: T[]): TrackedProxy<T[]>;
  * If an element / value is ever a non-object or non-array, deep-tracking will exit
  *
  */
-export function tracked<T extends Record<string, unknown>>(obj: T): TrackedProxy<T>;
+export function tracked<T extends Record<string, unknown>>(
+  obj: T,
+): TrackedProxy<T>;
 /**
  * Deeply track an Object or Array, and all nested objects/arrays within.
  *
@@ -54,7 +55,11 @@ export function tracked<T>(...[obj, key, desc]: DeepTrackedArgs<T>): unknown {
   return deepTracked(obj);
 }
 
-function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any): any {
+function deepTrackedForDescriptor(
+  _obj: object,
+  key: string | symbol,
+  desc: any,
+): any {
   let initializer = desc.initializer;
 
   delete desc.initializer;
@@ -75,57 +80,64 @@ function deepTrackedForDescriptor(_obj: object, key: string | symbol, desc: any)
   };
 }
 
-const TARGET = Symbol('TARGET');
-const IS_PROXIED = Symbol('IS_PROXIED');
+const TARGET = Symbol("TARGET");
+const IS_PROXIED = Symbol("IS_PROXIED");
 
 const SECRET_PROPERTIES: PropertyList = [TARGET, IS_PROXIED];
 
-const ARRAY_COLLECTION_PROPERTIES = ['length'];
+const ARRAY_COLLECTION_PROPERTIES = ["length"];
 const ARRAY_CONSUME_METHODS = [
   Symbol.iterator,
-  'at',
-  'concat',
-  'entries',
-  'every',
-  'filter',
-  'find',
-  'findIndex',
-  'findLast',
-  'findLastIndex',
-  'flat',
-  'flatMap',
-  'forEach',
-  'group',
-  'groupToMap',
-  'includes',
-  'indexOf',
-  'join',
-  'keys',
-  'lastIndexOf',
-  'map',
-  'reduce',
-  'reduceRight',
-  'slice',
-  'some',
-  'toString',
-  'values',
-  'length',
+  "at",
+  "concat",
+  "entries",
+  "every",
+  "filter",
+  "find",
+  "findIndex",
+  "findLast",
+  "findLastIndex",
+  "flat",
+  "flatMap",
+  "forEach",
+  "group",
+  "groupToMap",
+  "includes",
+  "indexOf",
+  "join",
+  "keys",
+  "lastIndexOf",
+  "map",
+  "reduce",
+  "reduceRight",
+  "slice",
+  "some",
+  "toString",
+  "values",
+  "length",
 ];
 
 const ARRAY_DIRTY_METHODS = [
-  'sort',
-  'fill',
-  'pop',
-  'push',
-  'shift',
-  'splice',
-  'unshift',
-  'reverse',
+  "sort",
+  "fill",
+  "pop",
+  "push",
+  "shift",
+  "splice",
+  "unshift",
+  "reverse",
 ];
 
-const ARRAY_QUERY_METHODS: PropertyList = ['indexOf', 'contains', 'lastIndexOf', 'includes'];
+const ARRAY_QUERY_METHODS: PropertyList = [
+  "indexOf",
+  "contains",
+  "lastIndexOf",
+  "includes",
+];
 
-function deepTracked<T extends object>(obj?: T | undefined): T | undefined | null {
+function deepTracked<T extends object>(
+  obj?: T | undefined,
+): T | undefined | null {
   if (obj === null || obj === undefined) {
     return obj;
   }
@@ -138,7 +150,7 @@ function deepTracked<T extends object>(obj?: T | undefined): T | undefined | nul
     return deepProxy(obj, arrayProxyHandler) as unknown as T;
   }
 
-  if (typeof obj === 'object') {
+  if (typeof obj === "object") {
     return deepProxy(obj, objProxyHandler) as unknown as T;
   }
 
@@ -157,7 +169,7 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
       return true;
     }
 
-    if (typeof property === 'string') {
+    if (typeof property === "string") {
       let parsed = parseInt(property, 10);
 
       if (!isNaN(parsed)) {
@@ -166,7 +178,9 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
         readCollection(target);
         readStorage(target, parsed);
 
-        return deepTracked(value);
+        // SAFETY: when a non-deep-trackable is passed to deepTracked, it no-ops
+        //         and immediately returns
+        return deepTracked(value as object);
       }
 
       if (ARRAY_COLLECTION_PROPERTIES.includes(property)) {
@@ -176,20 +190,22 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
       }
     }
 
-    if (typeof value === 'function') {
+    if (typeof value === "function") {
       let fnCache = fnCacheFor(target);
       let existing = fnCache.get(property);
 
       if (!existing) {
         let fn = (...args: unknown[]) => {
-          if (typeof property === 'string') {
+          if (typeof property === "string") {
             if (ARRAY_QUERY_METHODS.includes(property)) {
               readCollection(target);
 
               let fn = target[property];
 
-              if (typeof fn === 'function') {
-                return fn.call(target, ...args.map(unwrap));
+              if (typeof fn === "function") {
+                // SAFETY: unwrap will no-op if the object to unwrap doesn't have
+                //         the secret proxy property.
+                return fn.call(target, ...(args as object[]).map(unwrap));
               }
             } else if (ARRAY_CONSUME_METHODS.includes(property)) {
               readCollection(target);
@@ -212,7 +228,7 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
     return value;
   },
   set(target, property, value, receiver) {
-    if (typeof property === 'string') {
+    if (typeof property === "string") {
       let parsed = parseInt(property, 10);
 
       if (!isNaN(parsed)) {
@@ -223,7 +239,7 @@ const arrayProxyHandler: ProxyHandler<Array<unknown>> = {
         dirtyCollection(target);
 
         return Reflect.set(target, property, value, receiver);
-      } else if (property === 'length') {
+      } else if (property === "length") {
         dirtyCollection(target);
 
         return Reflect.set(target, property, value, receiver);
@@ -260,7 +276,9 @@ const objProxyHandler = {
 
     readStorage(target, prop);
 
-    return deepTracked(Reflect.get(target, prop, receiver));
+    // SAFETY: when a non-deep-trackable is passed to deepTracked, it no-ops
+    //         and immediately returns
+    return deepTracked(Reflect.get(target, prop, receiver) as object);
   },
   has<T extends object>(target: T, prop: keyof T) {
     if (SECRET_PROPERTIES.includes(prop)) {
@@ -278,7 +296,12 @@ const objProxyHandler = {
     return Reflect.ownKeys(target);
   },
 
-  set<T extends object>(target: T, prop: keyof T, value: T[keyof T], receiver: T) {
+  set<T extends object>(
+    target: T,
+    prop: keyof T,
+    value: T[keyof T],
+    receiver: T,
+  ) {
     updateStorage(target, prop);
     dirtyCollection(target);
 
@@ -292,7 +315,7 @@ const objProxyHandler = {
 
 const PROXY_CACHE = new WeakMap<any, object>();
 
-function unwrap<T>(obj: T) {
+function unwrap<T extends object>(obj: T) {
   if (TARGET in obj) {
     return obj[TARGET as keyof T];
   }
@@ -300,7 +323,10 @@ function unwrap<T>(obj: T) {
   return obj;
 }
 
-function deepProxy<T extends object>(obj: T, handler: ProxyHandler<T>): TrackedProxy<T> {
+function deepProxy<T extends object>(
+  obj: T,
+  handler: ProxyHandler<T>,
+): TrackedProxy<T> {
   let existing = PROXY_CACHE.get(obj);
 
   if (existing) {

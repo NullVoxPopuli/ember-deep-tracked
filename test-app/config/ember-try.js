@@ -1,7 +1,6 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
-const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
@@ -32,9 +31,65 @@ module.exports = async function () {
         },
       },
       {
+        name: 'ember-lts-4.8',
+        npm: {
+          devDependencies: {
+            'ember-source': '~4.8.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-4.12',
+        npm: {
+          devDependencies: {
+            'ember-source': '~4.12.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-5.4',
+        npm: {
+          devDependencies: {
+            '@types/ember-resolver': null,
+            'ember-export-application-global': null,
+            '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
+            'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-source': '~5.4.0',
+            'ember-cli': '^5.11.0',
+          },
+        },
+      },
+      {
+        name: 'ember-lts-5.8',
+        npm: {
+          devDependencies: {
+            '@types/ember-resolver': null,
+            'ember-export-application-global': null,
+            '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
+            'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-source': '~5.8.0',
+            'ember-cli': '^5.11.0',
+          },
+        },
+      },
+      {
         name: 'ember-release',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
+            'ember-export-application-global': null,
+            '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
+            'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('release'),
           },
         },
@@ -43,6 +98,14 @@ module.exports = async function () {
         name: 'ember-beta',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
+            'ember-export-application-global': null,
+            '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
+            'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('beta'),
           },
         },
@@ -51,12 +114,18 @@ module.exports = async function () {
         name: 'ember-canary',
         npm: {
           devDependencies: {
+            '@types/ember-resolver': null,
+            'ember-export-application-global': null,
+            '@ember/string': '^4.0.0',
+            '@ember/test-helpers': '^4.0.4',
+            'ember-resolver': '^12.0.1',
+            'ember-cli-app-version': '^7.0.0',
+            'ember-qunit': '^8.1.0',
+            'ember-cli': '^5.11.0',
             'ember-source': await getChannelURL('canary'),
           },
         },
       },
-      embroiderSafe(),
-      embroiderOptimized(),
     ],
   };
 };

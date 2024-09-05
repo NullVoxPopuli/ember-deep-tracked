@@ -1,10 +1,13 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createStorage, getValue, setValue } from 'ember-tracked-storage-polyfill';
+import {
+  createStorage,
+  getValue,
+  setValue,
+} from "ember-tracked-storage-polyfill";
 
-import type { TrackedStorage } from 'ember-tracked-storage-polyfill';
+import type { TrackedStorage } from "ember-tracked-storage-polyfill";
 
-const COLLECTION = Symbol('__ COLLECTION __');
+const COLLECTION = Symbol("__ COLLECTION __");
 
 type Key = number | string | symbol;
 
