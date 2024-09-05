@@ -22,7 +22,7 @@ module('deep tracked (in templates)', function (hooks) {
         hbs`<button type="button" {{on 'click' (fn @setNext this)}}>thing</button>
 
               <out>{{this.obj.foo.bar}}</out>`,
-        Foo
+        Foo,
       );
 
       this.setProperties({ Foo, setNext: () => {} });
@@ -66,7 +66,7 @@ module('deep tracked (in templates)', function (hooks) {
                 <li>{{item}}</li>
               {{/each}}
             </ul>`,
-        Foo
+        Foo,
       );
 
       this.setProperties({ Foo, setNext: () => {} });
@@ -162,7 +162,7 @@ module('deep tracked (in templates)', function (hooks) {
           hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
-          Foo
+          Foo,
         );
 
         this.setProperties({ Foo });
@@ -180,12 +180,19 @@ module('deep tracked (in templates)', function (hooks) {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
           slice = () => {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
-            this.obj.children[0].property = this.obj.children[0].property.slice(1);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
+            this.obj.children[0].property =
+              this.obj.children[0].property.slice(1);
           };
 
           get output() {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
 
             return this.obj.children[0].property;
           }
@@ -194,7 +201,7 @@ module('deep tracked (in templates)', function (hooks) {
           hbs`<button type="button" {{on 'click' this.slice}}>thing</button>
 
             <out>{{this.output}}</out>`,
-          Foo
+          Foo,
         );
 
         this.setProperties({ Foo });
@@ -219,7 +226,7 @@ module('deep tracked (in templates)', function (hooks) {
           hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.obj}}</out>`,
-          Foo
+          Foo,
         );
 
         this.setProperties({ Foo });
@@ -238,13 +245,19 @@ module('deep tracked (in templates)', function (hooks) {
           @tracked obj = { children: [{ property: [0, 1, 3] }] };
 
           splice = () => {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
 
             return this.obj.children[0].property.splice(1, 1);
           };
 
           get output() {
-            debugAssert(`Test failed to define an array on obj.children`, this.obj.children[0]);
+            debugAssert(
+              `Test failed to define an array on obj.children`,
+              this.obj.children[0],
+            );
 
             return this.obj.children[0].property;
           }
@@ -253,7 +266,7 @@ module('deep tracked (in templates)', function (hooks) {
           hbs`<button type="button" {{on 'click' this.splice}}>thing</button>
 
             <out>{{this.output}}</out>`,
-          Foo
+          Foo,
         );
 
         this.setProperties({ Foo });
@@ -303,7 +316,7 @@ module('deep tracked (in templates)', function (hooks) {
             <div id={{concat "item" index}}>{{item.prop}}</div>
             {{/each}}
             `,
-          Foo
+          Foo,
         );
 
         this.setProperties({ Foo });
@@ -359,7 +372,7 @@ module('deep tracked (in templates)', function (hooks) {
               </div>
             {{/each}}
             `,
-          Foo
+          Foo,
         );
         this.setProperties({ Foo });
 
