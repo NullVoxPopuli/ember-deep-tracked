@@ -51,6 +51,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@types/ember-resolver': null,
+            'ember-export-application-global': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -66,6 +67,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@types/ember-resolver': null,
+            'ember-export-application-global': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -81,6 +83,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@types/ember-resolver': null,
+            'ember-export-application-global': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -96,6 +99,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@types/ember-resolver': null,
+            'ember-export-application-global': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
@@ -111,6 +115,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             '@types/ember-resolver': null,
+            'ember-export-application-global': null,
             '@ember/string': '^4.0.0',
             '@ember/test-helpers': '^4.0.4',
             'ember-resolver': '^12.0.1',
