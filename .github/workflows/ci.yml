@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
-      - run: pnpm --filter test-app run test:ember
+      - run: pnpm --filter '*' run test:ember
 
   floating-deps-tests:
     name: Floating Deps Test

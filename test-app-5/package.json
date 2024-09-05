@@ -18,7 +18,7 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "npm-run-all lint \"test:!(watch)\"",
-    "test:ember": "ember test",
+    "test:ember": "ember test --test-port 0",
     "test:watch": "ember test --server"
   },
   "dependencies": {
