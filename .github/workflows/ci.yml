@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
         with:
           # Future installations will run "prepare"
@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - name: "Verify that no manually needed fixes / violations are present"
         run: pnpm lint
@@ -44,7 +44,7 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       - run: pnpm --filter '*' run test:ember
@@ -56,7 +56,7 @@ jobs:
     needs:
       - tests
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
         with:
           args: '--no-lockfile'
@@ -76,7 +76,7 @@ jobs:
           - ember-3.25
           - ember-lts-3.28
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       - run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
@@ -96,7 +96,7 @@ jobs:
           - ember-lts-4.8
           - ember-lts-4.12
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       - run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
@@ -118,7 +118,7 @@ jobs:
           - ember-beta
           - ember-canary
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
       - run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
