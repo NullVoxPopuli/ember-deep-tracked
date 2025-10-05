@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  ember-auto-import: 2.10.0
+  ember-auto-import: 2.10.1
 
 importers:
 
@@ -119,8 +119,8 @@ importers:
         specifier: ^8.4.0
         version: 8.43.0(eslint@8.57.1)(typescript@5.5.4)
       ember-auto-import:
-        specifier: 2.10.0
-        version: 2.10.0(webpack@5.101.3)
+        specifier: 2.10.1
+        version: 2.10.1(webpack@5.101.3)
       ember-cached-decorator-polyfill:
         specifier: ^0.1.4
         version: 0.1.4(@babel/core@7.28.4)
@@ -270,8 +270,8 @@ importers:
         specifier: ^8.4.0
         version: 8.43.0(eslint@8.57.1)(typescript@5.5.4)
       ember-auto-import:
-        specifier: 2.10.0
-        version: 2.10.0(webpack@5.101.3)
+        specifier: 2.10.1
+        version: 2.10.1(webpack@5.101.3)
       ember-cached-decorator-polyfill:
         specifier: ^0.1.4
         version: 0.1.4(@babel/core@7.28.4)
@@ -424,8 +424,8 @@ importers:
         specifier: ^8.4.0
         version: 8.43.0(eslint@8.57.1)(typescript@5.5.4)
       ember-auto-import:
-        specifier: 2.10.0
-        version: 2.10.0(webpack@5.101.3)
+        specifier: 2.10.1
+        version: 2.10.1(webpack@5.101.3)
       ember-cached-decorator-polyfill:
         specifier: ^0.1.4
         version: 0.1.4(@babel/core@7.28.4)
@@ -3640,8 +3640,8 @@ packages:
   electron-to-chromium@1.5.218:
     resolution: {integrity: sha512-uwwdN0TUHs8u6iRgN8vKeWZMRll4gBkz+QMqdS7DDe49uiK68/UX92lFb61oiFPrpYZNeZIqa4bA7O6Aiasnzg==}
 
-  ember-auto-import@2.10.0:
-    resolution: {integrity: sha512-bcBFDYVTFHyqyq8BNvsj6UO3pE6Uqou/cNmee0WaqBgZ+1nQqFz0UE26usrtnFAT+YaFZSkqF2H36QW84k0/cg==}
+  ember-auto-import@2.10.1:
+    resolution: {integrity: sha512-5K4lYSEBch3DKQn1VElFHDHcHTvhTJnB6aebf24VyIobLL+OMWORcCK1fiwyfPiVABztyuLXH2GiXDweNUtntA==}
     engines: {node: 12.* || 14.* || >= 16}
 
   ember-cache-primitive-polyfill@1.0.1:
@@ -9795,7 +9795,7 @@ snapshots:
 
   '@types/minimatch@6.0.0':
     dependencies:
-      minimatch: 5.1.6
+      minimatch: 10.0.3
 
   '@types/node@24.4.0':
     dependencies:
@@ -10164,7 +10164,7 @@ snapshots:
 
   ajv-formats@3.0.1:
     dependencies:
-      ajv: 8.13.0
+      ajv: 8.17.1
 
   ajv-keywords@3.5.2(ajv@6.12.6):
     dependencies:
@@ -11573,7 +11573,7 @@ snapshots:
 
   electron-to-chromium@1.5.218: {}
 
-  ember-auto-import@2.10.0(webpack@5.101.3):
+  ember-auto-import@2.10.1(webpack@5.101.3):
     dependencies:
       '@babel/core': 7.28.4(supports-color@8.1.1)
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.28.4)
@@ -12237,7 +12237,7 @@ snapshots:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 3.0.2
       common-tags: 1.8.2
-      ember-auto-import: 2.10.0(webpack@5.101.3)
+      ember-auto-import: 2.10.1(webpack@5.101.3)
       ember-cli-babel: 7.26.11
       ember-cli-test-loader: 3.1.0
       qunit: 2.24.1
@@ -12255,7 +12255,7 @@ snapshots:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 3.0.2
       common-tags: 1.8.2
-      ember-auto-import: 2.10.0(webpack@5.101.3)
+      ember-auto-import: 2.10.1(webpack@5.101.3)
       ember-cli-babel: 7.26.11
       ember-cli-test-loader: 3.1.0
       qunit: 2.24.1
@@ -12364,7 +12364,7 @@ snapshots:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 4.2.0
       chalk: 4.1.2
-      ember-auto-import: 2.10.0(webpack@5.101.3)
+      ember-auto-import: 2.10.1(webpack@5.101.3)
       ember-cli-babel: 7.26.11
       ember-cli-get-component-path-option: 1.0.0
       ember-cli-is-package-missing: 1.0.0
@@ -12416,7 +12416,7 @@ snapshots:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 4.2.0
       chalk: 4.1.2
-      ember-auto-import: 2.10.0(webpack@5.101.3)
+      ember-auto-import: 2.10.1(webpack@5.101.3)
       ember-cli-babel: 7.26.11
       ember-cli-get-component-path-option: 1.0.0
       ember-cli-is-package-missing: 1.0.0
