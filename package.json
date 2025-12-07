@@ -24,7 +24,7 @@
   },
   "pnpm": {
     "overrides": {
-      "ember-auto-import": "2.11.1"
+      "ember-auto-import": "2.12.0"
     }
   }
 }
