@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2024-09-05)
 
 ember-deep-tracked 2.0.1 (patch)
