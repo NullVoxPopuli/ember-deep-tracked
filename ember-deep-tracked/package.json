@@ -34,7 +34,7 @@
     "@babel/core": "^7.17.0",
     "@nullvoxpopuli/eslint-configs": "^4.2.0",
     "@tsconfig/ember": "^3.0.8",
-    "eslint": "^8.0.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^12.2.0",
     "eslint-plugin-node": "^11.1.0",
