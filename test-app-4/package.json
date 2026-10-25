@@ -40,7 +40,7 @@
     "@typescript-eslint/parser": "^8.4.0",
     "ember-auto-import": "^2.4.2",
     "ember-cached-decorator-polyfill": "^0.1.4",
-    "ember-cli": "~4.6.0",
+    "ember-cli": "~4.12.0",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-dependency-checker": "^3.3.1",
